@@ -1,0 +1,59 @@
+/**
+ * @file
+ *
+ * Copyright (C) 2016  Oleh Kravchenko <oleg@kaa.org.ua>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef __TOOLS_STRING_H
+#define __TOOLS_STRING_H
+
+/**
+ * @addtogroup strings
+ *
+ * @{
+ */
+
+/**
+ * @brief Replace all occurrences of the search string with the replacement string
+ * @param [in] search value being searched for
+ * @param [in] replace replacement value that replaces found search values
+ * @param [in] subject string being searched and replaced on
+ * @return pointer to allocated string
+ * @retval NULL error occurred
+ */
+char *str_replace(const char *search, const char *replace, const char *subject);
+
+/**
+ * @brief Size-bounded string copying
+ * @param [in] dst where to copy the string to
+ * @param [in] src where to copy the string from
+ * @param [in] size size of the destination buffer
+ * @return total length of the string tried to create
+ */
+size_t strlcpy(char *dst, const char *src, size_t size);
+
+/**
+ * @brief Size-bounded string concatenation
+ * @param [in] dst string to be appended to
+ * @param [in] src string to append to it
+ * @param [in] size size of the destination buffer
+ * @return total length of the string tried to create
+ */
+size_t strlcat(char *dst, const char *src, size_t size);
+
+/** @} */
+
+#endif /* __TOOLS_STRING_H */
