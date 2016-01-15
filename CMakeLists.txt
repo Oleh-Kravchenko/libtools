@@ -33,6 +33,7 @@ include/tools/gethostaddr.h
 include/tools/hex.h
 include/tools/http.h
 include/tools/iface.h
+include/tools/list.h
 include/tools/mailbox.h
 include/tools/mkpasswd.h
 include/tools/movefile.h
