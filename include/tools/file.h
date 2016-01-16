@@ -30,13 +30,13 @@
 
 /**
  * @brief save data to file
- * @param [in] filename file name
+ * @param [in] path file name
  * @param [in] buf pointer to data buffer
  * @param [in] len length of data at buffer @p buf
  * @return on success, zero is returned
  * @retval -1 error occurred
  */
-int put_file_contents(const char *filename, const void *buf, size_t len);
+int put_file_contents(const char *path, const void *buf, size_t len);
 
 /**
  * @brief allocate memory and read data from file

@@ -8,7 +8,6 @@
 
 ssize_t recvall(int sockfd, void *buf, size_t len, int flags)
 {
-	assert(sockfd >= 0);
 	assert(buf);
 	assert(len);
 

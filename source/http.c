@@ -14,11 +14,11 @@
 
 #define __HTTPEOL "\r\n"
 
-const static char httpeol[] = __HTTPEOL;
-const static size_t httpeol_len = countof(httpeol) - 1;
+static const char httpeol[] = __HTTPEOL;
+static const size_t httpeol_len = countof(httpeol) - 1;
 
-const static char httpver[] = "HTTP/";
-const static size_t httpver_len = countof(httpver) - 1;
+static const char httpver[] = "HTTP/";
+static const size_t httpver_len = countof(httpver) - 1;
 
 /*------------------------------------------------------------------------*/
 
@@ -53,8 +53,6 @@ static http_status_t sock2http_status(ssize_t i)
  */
 static http_status_t http_headers_send(int sockfd, http_header_t hdr[], size_t count)
 {
-	assert(sockfd >= 0);
-
 	char *s;
 	int len;
 
@@ -322,24 +320,23 @@ static http_status_t http_header_parse(char *s, char **name, char **val)
  */
 static http_status_t http_readline(int sockfd, char *s, size_t *len)
 {
-	assert(sockfd >= 0);
 	assert(s);
-	assert(len && *len);
+	assert(len);
 
-	http_status_t ret;
-	ssize_t received;
+	http_status_t rc;
+	ssize_t recvlen;
 
+	recvlen = recvline(sockfd, s, *len, httpeol, httpeol_len);
 
-	received = recvline(sockfd, s, *len - 1, httpeol, httpeol_len);
-
-	if (HTTP_ERROR(ret = sock2http_status(received))) {
-		return (ret);
+	if (HTTP_ERROR(rc = sock2http_status(recvlen))) {
+		return (rc);
 	}
 
-	*len = received;
+	*len = recvlen;
 
-	if (received < httpeol_len ||
-		memcmp(&s[received - httpeol_len], httpeol, httpeol_len)
+	/* verify end of line */
+	if (recvlen < (ssize_t)httpeol_len ||
+		memcmp(&s[recvlen - httpeol_len], httpeol, httpeol_len)
 	) {
 		return (HTTP_LARGE_REQUEST);
 	}
@@ -354,7 +351,6 @@ static http_status_t http_readline(int sockfd, char *s, size_t *len)
 
 http_status_t http_request_send(int sockfd, http_method_t method, const char *path, const char *ver, http_header_t hdr[], size_t count)
 {
-	assert(sockfd >= 0);
 	assert(path);
 	assert(ver);
 
@@ -396,7 +392,6 @@ http_status_t http_request_send(int sockfd, http_method_t method, const char *pa
 
 http_status_t http_request_recv(int sockfd, http_request_cb_t request_cb, http_header_cb_t header_cb, void *priv)
 {
-	assert(sockfd >= 0);
 	assert(request_cb);
 	assert(header_cb);
 
@@ -451,9 +446,8 @@ http_status_t http_request_recv(int sockfd, http_request_cb_t request_cb, http_h
 
 http_status_t http_reply_send(int sockfd, const char *ver, int code, const char *desc, http_header_t hdr[], size_t count)
 {
-	assert(sockfd);
 	assert(ver);
-	assert(code > 0);
+	assert(100 <= code && code < 600);
 	assert(desc);
 
 	http_status_t ret;
@@ -486,7 +480,6 @@ http_status_t http_reply_send(int sockfd, const char *ver, int code, const char 
 
 http_status_t http_reply_recv(int sockfd, http_reply_cb_t reply_cb, http_header_cb_t header_cb, void *priv)
 {
-	assert(sockfd >= 0);
 	assert(reply_cb);
 	assert(header_cb);
 

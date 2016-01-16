@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <ctype.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -19,6 +20,8 @@
 
 void strdump(const void *buf, size_t len)
 {
+	assert(buf);
+
 	const uint8_t *str = buf;
 
 	if (!len) {
@@ -36,6 +39,8 @@ void strdump(const void *buf, size_t len)
 
 void hexdump8(const void *buf, size_t len)
 {
+	assert(buf);
+
 	const uint8_t *data = buf;
 	size_t i, spaces, tail;
 
@@ -95,6 +100,9 @@ void hexdump8(const void *buf, size_t len)
 
 void cdump8(const char *name, const void *buf, size_t len)
 {
+	assert(name);
+	assert(buf);
+
 	const uint8_t *data = buf;
 	size_t i;
 

@@ -15,7 +15,7 @@ FIND_PACKAGE(MySQL REQUIRED)
 FIND_PACKAGE(OpenSSL REQUIRED)
 
 # catch lazy errors during compilation and enable GNU extensions
-ADD_DEFINITIONS(-pedantic -std=gnu99 -Wall -Werror -D_GNU_SOURCE)
+ADD_DEFINITIONS(-pedantic -std=gnu99 -Wall -Wextra -Werror -D_GNU_SOURCE)
 
 INCLUDE_DIRECTORIES(include)
 

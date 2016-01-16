@@ -13,6 +13,8 @@
 
 pid_t daemonize(const char *path, char *const argv[], int nochdir, int noclose)
 {
+	assert(path);
+
 	pid_t pid;
 	int fds[2];
 
@@ -108,7 +110,6 @@ done:
 int pidlock_set(const char *path)
 {
 	assert(path);
-
 
 	/* try open and lock file */
 	FILE *f;

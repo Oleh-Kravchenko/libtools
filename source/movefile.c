@@ -46,13 +46,13 @@ int movefile(const char *oldpath, const char *newpath)
 	size_t len;
 
 	while (stat.st_size) {
-		len = min(stat.st_size, sizeof(chunk));
+		len = min((size_t)stat.st_size, sizeof(chunk));
 
-		if (read(oldfd, chunk, len) != len) {
+		if (read(oldfd, chunk, len) != (ssize_t)len) {
 			goto err;
 		}
 
-		if (write(newfd, chunk, len) != len) {
+		if (write(newfd, chunk, len) != (ssize_t)len) {
 			goto err;
 		}
 

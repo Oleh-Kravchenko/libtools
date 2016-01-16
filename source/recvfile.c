@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <errno.h>
 #include <stdio.h>
 #include <sys/param.h>
@@ -10,6 +11,8 @@
 
 int recvfile(int sockfd, const char *path, size_t size)
 {
+	assert(path);
+
 	FILE *f;
 
 	if (!(f = fopen(path, "w"))) {
@@ -28,8 +31,7 @@ int recvfile(int sockfd, const char *path, size_t size)
 		}
 
 		/* save it to file */
-		save = fwrite(buf, 1, save, f);
-		if (0 == save) {
+		if (fwrite(buf, 1, save, f) != (size_t)save) {
 			errno = ferror(f);
 
 			break;
@@ -42,5 +44,5 @@ int recvfile(int sockfd, const char *path, size_t size)
 		return (-1);
 	}
 
-	return (!!size);
+	return (size);
 }

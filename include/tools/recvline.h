@@ -29,20 +29,20 @@
  */
 
 /**
- * @brief receive string from socket
- * @param [in] sockfd socket descriptor
- * @param [in] buf buffer for received string
+ * @brief receive data from socket until delimiter is not reached
+ * @param [in] fd socket descriptor
+ * @param [out] buf buffer for received data
  * @param [in] size length of buffer @p buf in bytes
- * @param [in] s end of line marker
- * @param [in] len length of @p s marker
+ * @param [in] d pointer to delimiter data
+ * @param [in] dlen length of delimiter data in bytes
  * @return amount of received bytes
  * @retval 0 connection closed
  * @retval -1 error occurred
  *
- * Buffer @p buf should contain string with EOL @p s if not,
+ * Buffer @p buf should contain data with terminal delimiter @p d if not,
  * than buffer @p buf is too small to store whole string.
  */
-ssize_t recvline(int sockfd, char *buf, size_t size, const char *s, size_t len);
+ssize_t recvline(int fd, char *buf, size_t size, const char *d, size_t dlen);
 
 /** @} */
 

@@ -30,14 +30,14 @@
 
 /**
  * @brief make strong password
- * @param [in,out] s NULL-terminated string with password
- * @param [in] len maximum length of @p s
+ * @param [out] s NULL-terminated string with password
+ * @param [in] size buffer size at pointer @p s
  * @return pointer to @p s or NULL, if failed
  *
  * This function use random(), so before using you should initialize
  * random seed by some value, for example by this call srandom(time(NULL))
  */
-char *mkpasswd(char *s, size_t len);
+char *mkpasswd(char *s, size_t size);
 
 /** @} */
 

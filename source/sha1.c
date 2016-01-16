@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -7,6 +8,9 @@
 
 int sha1_file(const char *path, sha1_t *hash)
 {
+	assert(path);
+	assert(hash);
+
 	uint8_t buf[4 << 10];
 	size_t buf_len;
 	int ret = -1;

@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -6,12 +7,15 @@
 
 /*------------------------------------------------------------------------*/
 
-int put_file_contents(const char *filename, const void *buf, size_t len)
+int put_file_contents(const char *path, const void *buf, size_t len)
 {
+	assert(path);
+	assert(buf);
+
 	size_t ret;
 	FILE *f;
 
-	if (!(f = fopen(filename, "wb"))) {
+	if (!(f = fopen(path, "wb"))) {
 		return(-1);
 	}
 
@@ -25,6 +29,10 @@ int put_file_contents(const char *filename, const void *buf, size_t len)
 
 void *get_file_contents(const char *path, void **buf, size_t *len)
 {
+	assert(path);
+	assert(buf);
+	assert(len);
+
 	struct stat st;
 	FILE *f;
 
@@ -42,7 +50,7 @@ void *get_file_contents(const char *path, void **buf, size_t *len)
 		return (NULL);
 	}
 
-	if (fread(*buf, 1, st.st_size, f) != st.st_size) {
+	if (fread(*buf, 1, st.st_size, f) != (size_t)st.st_size) {
 		free(*buf);
 		fclose(f);
 

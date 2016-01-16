@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <ctype.h>
 #include <openssl/bn.h>
 #include <string.h>
@@ -8,9 +9,11 @@
 
 char *bin2hex(const void *data, size_t len, char *hex, size_t hex_len)
 {
+	assert(data);
+	assert(hex);
+
 	BIGNUM bnObject;
 	char *bnHex;
-	int i;
 
 	BN_init(&bnObject);
 
@@ -26,7 +29,7 @@ char *bin2hex(const void *data, size_t len, char *hex, size_t hex_len)
 	BN_free(&bnObject);
 
 	/* hash string to lower case */
-	for(i = 0; i < strlen(bnHex); ++ i) {
+	for(size_t i = strlen(bnHex); i; -- i) {
 		bnHex[i] = tolower(bnHex[i]);
 	}
 
@@ -42,6 +45,9 @@ char *bin2hex(const void *data, size_t len, char *hex, size_t hex_len)
 
 size_t hex2bin(const char *hex, void *data, size_t data_len)
 {
+	assert(hex);
+	assert(data);
+
 	BIGNUM* bnObject;
 	size_t ret;
 	void *out;

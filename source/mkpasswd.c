@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdlib.h>
 
 #include "tools/mkpasswd.h"
@@ -5,23 +6,26 @@
 
 /*------------------------------------------------------------------------*/
 
-char *mkpasswd(char *s, size_t len)
+char *mkpasswd(char *s, size_t size)
 {
-	if(!s || !len) {
+	assert(s);
+
+	if (!size) {
 		return(NULL);
 	}
 
-	const static char dict[] = "0123456789"
+	/* keep space for \0 */
+	-- size;
+
+	static const char dict[] = "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-	size_t i;
-
-	for (i = 0; i < len - 1; ++ i) {
+	for (size_t i = 0; i < size; ++ i) {
 		s[i] = dict[random() % (countof(dict) - 1)];
 	}
 
-	s[i] = 0;
+	s[size] = 0;
 
 	return(s);
 }
