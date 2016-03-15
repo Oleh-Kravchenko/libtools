@@ -1,286 +1,152 @@
 #include <assert.h>
-#include <ctype.h>
 #include <string.h>
+#include <uriparser/Uri.h>
 
 #include "tools/url.h"
+#include "tools/string.h"
 
 /*------------------------------------------------------------------------*/
 
-static int isschema(int c)
+/**
+ * @brief Extract parsed URI components
+ * @param [in] uri pointer to parser URI
+ * @param [in,out] u pointer to URL components
+ * @return on success, zero is returned
+ * @retval -1 error occurred
+ */
+static inline int url_parse_internal(UriUriA *uri, struct url *u)
 {
-	return ('+' == c || '-' == c || '.' == c || islower(c) || isdigit(c));
-}
-
-/*------------------------------------------------------------------------*/
-
-static int isuserinfo(int c)
-{
-	return (isalnum(c) ||
-		'\'' == c ||
-		'$' == c ||
-		'-' == c ||
-		'_' == c ||
-		'.' == c ||
-		'+' == c ||
-		'!' == c ||
-		'*' == c ||
-		'(' == c ||
-		')' == c ||
-		',' == c ||
-		';' == c ||
-		'?' == c ||
-		'&' == c ||
-		'=' == c ||
-		'%' == c
-	);
-}
-
-/*------------------------------------------------------------------------*/
-
-static int ishostname(int c)
-{
-	return (isalnum(c) || '.' == c || '-' == c);
-}
-
-/*------------------------------------------------------------------------*/
-
-static int ispath(int c)
-{
-	return (isuserinfo(c) && '?' != c && '#' != c);
-}
-
-/*------------------------------------------------------------------------*/
-
-static int isquery(int c)
-{
-	return (isuserinfo(c) && '#' != c);
-}
-
-/*------------------------------------------------------------------------*/
-
-int url_unpack(char *s, struct url *url)
-{
-	assert(s);
-	assert(url);
-
-	char *head = s;
-	char *tail = s;
-
-	memset(url, 0, sizeof(*url));
-
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 * ^
-	 * schema always starts from lower case character
-	 */
-	if (islower(*tail)) {
-		do {
-			++ tail;
-		} while (isschema(*tail));
-
-		/* schema should be end by "://" */
-		if (!strncmp(tail, "://", strlen("://"))) {
-			*tail = '\0';
-
-			url->schema = head;
-			head = tail += strlen("://");
-		} else {
-			/* no schema, reset state */
-			tail = head;
-		}
-	}
-
-
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *          ^
-	 */
-	if (isuserinfo(*tail)) {
-		do {
-			++ tail;
-		} while (isuserinfo(*tail));
-
-		/* username should be ended by ":" or "@" */
-		if ('@' == *tail || ':' == *tail) {
-			url->username = head;
-
-			int next_ishost = '@' == *tail;
-
-			*tail = '\0';
-			head = ++ tail;
-
-			if (next_ishost) {
-				goto hostname;
-			}
-		} else {
-			tail = head;
-		}
-	}
-
-
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *               ^
-	 */
-	if (url->username && isuserinfo(*tail)) {
-		do {
-			++ tail;
-		} while (isuserinfo(*tail));
-
-		/* username should be ended by "@" */
-		if ('@' == *tail) {
-			url->password = head;
-
-			*tail = '\0';
-			head = ++ tail;
-		} else {
-			tail = head;
-
-			/* username is a hostname */
-			url->hostname = url->username;
-			url->username = NULL;
-
-			goto port;
-		}
-	}
-
-
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *                    ^
-	 */
-hostname:
-	if (!isalnum(*tail)) {
-		/* if we don't have hostname, it end */
+	/* extract scheme */
+	if (uri->scheme.first && !str_ncat(
+		&u->scheme,
+		uri->scheme.first,
+		uri->scheme.afterLast - uri->scheme.first
+	)) {
 		return (-1);
 	}
 
-	do {
-		++ tail;
-	} while (ishostname(*tail));
+	/* extract username and password */
+	if (uri->userInfo.first) {
+		char *userinfo = NULL;
 
-	/* hostname should end by ":", "/" or by "\0" */
-	if (':' == *tail || '/' == *tail || !*tail) {
-		url->hostname = head;
-
-		if (!*tail) {
-			goto done;
+		if (!str_ncat(
+			&userinfo,
+			uri->userInfo.first,
+			uri->userInfo.afterLast - uri->userInfo.first
+		)){
+			return (-1);
 		}
 
-		int next_isresource = '/' == *tail;
+		char *password = strchr(userinfo, ':');
 
-		*tail = '\0';
-		head = ++ tail;
+		if (password) {
+			/* split userinfo to username and password */
+			*password ++ = '\0';
 
-		if (next_isresource) {
-			goto resource;
+			u->password = strdup(password);
 		}
-	} else {
-		/* invalid hostname? */
-		return (-1);
-	}
 
+		u->username = strdup(userinfo);
+		free(userinfo);
 
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *                         ^
-	 */
-port:
-	if (isdigit(*tail)) {
-		do {
-			++ tail;
-		} while (isdigit(*tail));
-
-		/* port should be ended by "/" or "\0" */
-		if ('/' == * tail || !*tail) {
-			url->port = head;
-
-			if (!*tail) {
-				goto done;
-			}
-
-			*tail = '\0';
-			head = ++ tail;
-		} else {
-			/* invalid port? */
+		/* verify memory allocation for username and password */
+		if (!u->username || (password && !u->password)) {
 			return (-1);
 		}
 	}
 
+	/* extract hostname */
+	if (uri->hostText.first && !str_ncat(
+		&u->hostname,
+		uri->hostText.first,
+		uri->hostText.afterLast - uri->hostText.first
+	)) {
+		return (-1);
+	}
 
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *                              ^
-	 */
-resource:
-	if (ispath(*tail)) {
-		do {
-			++ tail;
-		} while (ispath(*tail));
+	/* extract port number */
+	if (uri->portText.first) {
+		u->port = atoi(uri->portText.first);
+	}
 
-		/* path should be ended by "?", "#" or "\0" */
-		if ('?' == * tail || '#' == *tail || !*tail) {
-			url->resource = head;
+	/* extract path*/
+	if (uri->pathHead && uri->pathTail && uri->pathHead->text.first) {
+		if (!(u->path = strdup("/"))) {
+			return (-1);
+		}
 
-			if (!*tail) {
-				goto done;
-			}
-
-			int next_istag = '#' == *tail;
-
-			*tail = '\0';
-			head = ++ tail;
-
-			if (next_istag) {
-				goto tag;
-			}
-		} else {
-			tail = head;
+		if (!str_ncat(&u->path,
+			uri->pathHead->text.first,
+			uri->pathTail->text.afterLast - uri->pathHead->text.first
+		)) {
+			return (-1);
 		}
 	}
 
-
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *                                  ^
-	 */
-	if (isquery(*tail)) {
-		do {
-			++ tail;
-		} while (isquery(*tail));
-
-		/* query should be ended by "#" or "\0" */
-		if ('#' == *tail || !*tail) {
-			/* path can be empty and query can start from "?" */
-			if ('?' == *head) {
-				++ head;
-			}
-
-			url->query = head;
-
-			if (!*tail) {
-				goto done;
-			}
-
-			*tail = '\0';
-			head = ++ tail;
-		}
+	/* extract query */
+	if (uri->query.first && !str_ncat(
+		&u->query,
+		uri->query.first,
+		uri->query.afterLast - uri->query.first
+	)) {
+		return (-1);
 	}
 
-	/* we are here:
-	 * SCHEMA://USER:PASS@HOST:PORT/PATH?QUERY#TAG
-	 *                                        ^
-	 */
-tag:
-	if (*tail) {
-		/* query can be empty and tag can start from "#" */
-		if ('#' == *head) {
-			++ head;
-		}
-
-		url->tag = head;
+	/* extract fragment */
+	if (uri->fragment.first && !str_ncat(
+		&u->fragment,
+		uri->fragment.first,
+		uri->fragment.afterLast - uri->fragment.first
+	)) {
+		return (-1);
 	}
 
-done:
 	return (0);
+}
+
+/*------------------------------------------------------------------------*/
+
+struct url *url_parse(const char *s, struct url **u)
+{
+	assert(s);
+	assert(u);
+
+	if (!(*u = calloc(1, sizeof(**u)))) {
+		return (*u);
+	}
+
+	int error = -1;
+	UriUriA uri;
+
+	/* parse URI by uriparser library */
+	if (uriParseUriA(&(UriParserStateA){.uri = &uri}, s) == URI_SUCCESS) {
+		/* try to extract parsed URI */
+		error = url_parse_internal(&uri, *u);
+	}
+
+	uriFreeUriMembersA(&uri);
+
+	/* if extraction failed, free allocated memory */
+	if (error) {
+		url_free(*u);
+		*u = NULL;
+	}
+
+	return (*u);
+}
+
+/*------------------------------------------------------------------------*/
+
+void url_free(struct url *u)
+{
+	if (u) {
+		free(u->scheme);
+		free(u->username);
+		free(u->password);
+		free(u->hostname);
+		free(u->path);
+		free(u->query);
+		free(u->fragment);
+		free(u);
+	}
 }

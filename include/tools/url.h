@@ -20,52 +20,69 @@
 #ifndef __TOOLS_URL_H
 #define __TOOLS_URL_H
 
+#include <stdint.h>
+
 /**
  * @addtogroup strings
+ * @defgroup url URL parsing
+ * @brief Just wrapper around http://uriparser.sourceforge.net/
+ *
+ * For more details about syntax of URL please take a look:
+ * @li https://tools.ietf.org/html/rfc3986
+ * @li http://uriparser.sourceforge.net/
  *
  * @{
  */
 
 /*------------------------------------------------------------------------*/
 
-/** unpacked url, see url_unpack() */
+/** parserd URL, see url_parse() */
 struct url {
-	/** schema(protocol) */
-	char *schema;
+	/** scheme (protocol) */
+	char *scheme;
 
-	/** username for url */
+	/** username for URL */
 	char *username;
 
-	/** password for url */
+	/** password for URL */
 	char *password;
 
-	/** hostname for url */
+	/** hostname for URL */
 	char *hostname;
 
-	/** port for url */
-	char *port;
+	/** port for URL */
+	uint16_t port;
 
-	/** path of resource url */
-	char *resource;
+	/** path of resource URL */
+	char *path;
 
 	/** query to resource */
 	char *query;
 
-	/** tag */
-	char *tag;
+	/** fragment */
+	char *fragment;
 };
 
 /**
- * @brief parse string as url
- * @param [in] s url string
- * @param [out] url unparsed strings of url
- * @return zero is returned
- * @retval -1 error occurred
+ * @brief Parse string as URL
+ * @param [in] s URL string
+ * @param [out] u pointer to URL parsed parts
+ * @return pointer to URL structure
+ * @retval NULL error occurred
  *
- * This function parse url of this scheme:
- * [SCHEMA://][USER[:PASS]@]HOST[:PORT][/[PATH][?QUERY][\#tag]]
+ * Parsed URL will be extracted to struct url.
+ *
+ * For more details about syntax of URL please take a look:
+ * @li https://tools.ietf.org/html/rfc3986
+ * @li http://uriparser.sourceforge.net/
  */
-int url_unpack(char *s, struct url *url);
+struct url *url_parse(const char *s, struct url **u);
+
+/**
+ * @brief Free memory used by URL structure
+ * @param [in] u pointer to URL structure
+ */
+void url_free(struct url *u);
 
 /** @} */
 
