@@ -27,6 +27,29 @@
  */
 
 /**
+ * @brief Concatenate dynamically allocated string with constant string
+ * @param [in,out] dest pointer to pointer of dynamically allocated string
+ * @param [in] src pointer to constant string
+ * @return pointer to concatenated string
+ * @retval NULL error occurred
+ * @remarks @p dest can point to NULL value
+ * @remarks @p src can be NULL
+ */
+char *str_cat(char **dest, const char *src);
+
+/**
+ * @brief Similar to str_cat() except it will use at most @p n bytes from @p src
+ * @param [in,out] dest pointer to pointer of dynamically allocated string
+ * @param [in] src pointer to constant string
+ * @param [in] n limit constant string length
+ * @return pointer to concatenated string
+ * @retval NULL error occurred
+ * @remarks @p dest can point to NULL value
+ * @remarks @p src can be NULL
+ */
+char *str_ncat(char **dest, const char *src, size_t n);
+
+/**
  * @brief Replace all occurrences of the search string with the replacement string
  * @param [in] search value being searched for
  * @param [in] replace replacement value that replaces found search values

@@ -6,6 +6,56 @@
 
 /*------------------------------------------------------------------------*/
 
+char *str_cat(char **dest, const char *src)
+{
+	assert(dest);
+
+	size_t dlen = *dest ? strlen(*dest) : 0;
+	size_t slen = src ? strlen(src) : 0;
+	size_t tlen = dlen + slen;
+
+	char *s = realloc(*dest, tlen + 1);
+
+	if (s) {
+		/* suppress __nonnull warning */
+		if (src) {
+			memcpy(s + dlen, src, slen);
+		}
+
+		s[tlen] = 0;
+		*dest = s;
+	}
+
+	return (s);
+}
+
+/*------------------------------------------------------------------------*/
+
+char *str_ncat(char **dest, const char *src, size_t n)
+{
+	assert(dest);
+
+	size_t dlen = *dest ? strlen(*dest) : 0;
+	size_t slen = src ? strnlen(src, n) : 0;
+	size_t tlen = dlen + slen;
+
+	char *s = realloc(*dest, tlen + 1);
+
+	if (s) {
+		/* suppress __nonnull warning */
+		if (src) {
+			memcpy(s + dlen, src, slen);
+		}
+
+		s[tlen] = 0;
+		*dest = s;
+	}
+
+	return (s);
+}
+
+/*------------------------------------------------------------------------*/
+
 char *str_replace(const char *search, const char *replace, const char *subject)
 {
 	assert(search && *search);
