@@ -122,6 +122,9 @@ struct url *url_parse(const char *s, struct url **u)
 	if (uriParseUriA(&(UriParserStateA){.uri = &uri}, s) == URI_SUCCESS) {
 		/* try to extract parsed URI */
 		error = url_parse_internal(&uri, *u);
+
+		/* allow to specify path in hostname with %2f delimiter */
+		uriUnescapeInPlaceA((*u)->hostname);
 	}
 
 	uriFreeUriMembersA(&uri);
