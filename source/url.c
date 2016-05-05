@@ -1,9 +1,11 @@
 #include <assert.h>
 #include <string.h>
+#include <sys/un.h>
 #include <uriparser/Uri.h>
 
-#include "tools/url.h"
+#include "tools/gethostaddr.h"
 #include "tools/string.h"
+#include "tools/url.h"
 
 /*------------------------------------------------------------------------*/
 
@@ -152,4 +154,37 @@ void url_free(struct url *u)
 		free(u->fragment);
 		free(u);
 	}
+}
+
+/*------------------------------------------------------------------------*/
+
+int url2sockaddr(struct url *u, struct sockaddr *sa)
+{
+	memset(sa, 0, sizeof(*sa));
+
+	/* socket address for HTTP */
+	if (u->scheme && u->hostname && !strcmp(u->scheme, "http")) {
+		struct sockaddr_in *in = (struct sockaddr_in*)sa;
+
+		in->sin_family = AF_INET;
+		in->sin_port = htons(u->port ? u->port : 80);
+
+		/* resolving hostname */
+		if (!gethostaddr(u->hostname, &in->sin_addr)) {
+			return (-1);
+		}
+	/* socket address for UNIX */
+	} else if (u->scheme && u->hostname && (
+		!strcmp(u->scheme, "local") ||
+		!strcmp(u->scheme, "unix")
+	)) {
+		struct sockaddr_un *un = (struct sockaddr_un*)sa;
+
+		un->sun_family = AF_LOCAL;
+		strlcpy(un->sun_path, u->hostname, sizeof(un->sun_path));
+	} else {
+		return (-1);
+	}
+
+	return (0);
 }

@@ -21,6 +21,7 @@
 #define __TOOLS_URL_H
 
 #include <stdint.h>
+#include <sys/socket.h>
 
 /**
  * @addtogroup strings
@@ -83,6 +84,20 @@ struct url *url_parse(const char *s, struct url **u);
  * @param [in] u pointer to URL structure
  */
 void url_free(struct url *u);
+
+/**
+ * @brief Set socket address according to URL
+ * @param [in] u pointer to URL structure
+ * @param [out] sa pointer to socket address structure
+ * @return on success, zero is returned
+ * @retval -1 error occurred
+ *
+ * Support next schemes:
+ * @li @p http Internet sockets
+ * @li @p unix sockets for local interprocess communication
+ * @li @p local alias for @p unix sockets
+ */
+int url2sockaddr(struct url *u, struct sockaddr *sa);
 
 /** @} */
 
