@@ -158,7 +158,7 @@ void url_free(struct url *u)
 
 /*------------------------------------------------------------------------*/
 
-int url2sockaddr(struct url *u, struct sockaddr *sa)
+int url2sockaddr(struct url *u, struct sockaddr_storage *sa)
 {
 	memset(sa, 0, sizeof(*sa));
 
@@ -187,4 +187,23 @@ int url2sockaddr(struct url *u, struct sockaddr *sa)
 	}
 
 	return (0);
+}
+
+/*------------------------------------------------------------------------*/
+
+socklen_t sockaddr_size(const struct sockaddr_storage *sa)
+{
+	switch (sa->ss_family) {
+		case AF_UNIX:
+			return (sizeof(struct sockaddr_un));
+
+		case AF_INET:
+			return (sizeof(struct sockaddr_in));
+
+		case AF_INET6:
+			return (sizeof(struct sockaddr_in6));
+
+		default:
+			return (sizeof(struct sockaddr));
+	}
 }

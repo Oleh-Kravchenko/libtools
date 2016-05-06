@@ -97,7 +97,14 @@ void url_free(struct url *u);
  * @li @p unix sockets for local interprocess communication
  * @li @p local alias for @p unix sockets
  */
-int url2sockaddr(struct url *u, struct sockaddr *sa);
+int url2sockaddr(struct url *u, struct sockaddr_storage *sa);
+
+/**
+ * @brief Return real size of socket address
+ * @param [in] sa pointer to socket address storage
+ * @return real size of socket address
+ */
+socklen_t sockaddr_size(const struct sockaddr_storage *sa);
 
 /** @} */
 
