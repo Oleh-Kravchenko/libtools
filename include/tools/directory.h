@@ -35,7 +35,7 @@
  * @return zero returned
  * @retval -1 error occurred
  *
- * This function make parent directories, if needed needed.
+ * This function make parent directories, if needed.
  */
 int mkdirectory(const char *path, mode_t mode);
 
