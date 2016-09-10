@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
-PROJECT(libtools VERSION 0.0.1)
+PROJECT(libtools VERSION 0.0.2)
 
 INCLUDE(GNUInstallDirs)
 INCLUDE(CMakePackageConfigHelpers)
@@ -11,19 +11,36 @@ SET(INSTALL_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmak
 SET(INSTALL_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake")
 
 FIND_PACKAGE(Doxygen)
-FIND_PACKAGE(MySQL REQUIRED)
 FIND_PACKAGE(OpenSSL REQUIRED)
-FIND_PACKAGE(PkgConfig REQUIRED)
-PKG_CHECK_MODULES(URIPARSER REQUIRED liburiparser)
+
+# configure MySQL support
+IF(DEFINED WITH_MYSQL)
+	IF(WITH_MYSQL)
+		FIND_PACKAGE(MySQL REQUIRED)
+	ENDIF()
+ELSE()
+	FIND_PACKAGE(MySQL)
+ENDIF()
+
+# configure uriparser support
+IF(DEFINED WITH_URIPARSER)
+	IF(WITH_URIPARSER)
+		FIND_PACKAGE(PkgConfig REQUIRED)
+		PKG_CHECK_MODULES(URIPARSER REQUIRED liburiparser)
+	ENDIF()
+ELSE()
+	FIND_PACKAGE(PkgConfig)
+	IF (PKG_CONFIG_FOUND)
+		PKG_CHECK_MODULES(URIPARSER liburiparser)
+	ENDIF()
+ENDIF()
 
 # catch lazy errors during compilation and enable GNU extensions
 ADD_DEFINITIONS(-pedantic -std=gnu99 -Wall -Wextra -Werror -D_GNU_SOURCE)
 
 INCLUDE_DIRECTORIES(
 include
-${MYSQL_INCLUDE_DIR}
 ${OPENSSL_INCLUDE_DIR}
-${URIPARSER_INCLUDE_DIRS}
 )
 
 SET(TOOLS_HEADERS
@@ -44,7 +61,6 @@ include/tools/list.h
 include/tools/mailbox.h
 include/tools/mkpasswd.h
 include/tools/movefile.h
-include/tools/mysql.h
 include/tools/recvall.h
 include/tools/recvfile.h
 include/tools/recvline.h
@@ -54,7 +70,6 @@ include/tools/sha1.h
 include/tools/string.h
 include/tools/tools.h
 include/tools/trim.h
-include/tools/url.h
 )
 
 SET(TOOLS_SOURCES
@@ -74,7 +89,6 @@ source/iface.c
 source/mailbox.c
 source/mkpasswd.c
 source/movefile.c
-source/mysql.c
 source/re.c
 source/recvall.c
 source/recvfile.c
@@ -83,8 +97,19 @@ source/sendfile.c
 source/sha1.c
 source/string.c
 source/trim.c
-source/url.c
 )
+
+IF(MYSQL_FOUND)
+	INCLUDE_DIRECTORIES(${MYSQL_INCLUDE_DIR})
+	LIST(APPEND TOOLS_HEADERS include/tools/mysql.h)
+	LIST(APPEND TOOLS_SOURCES source/mysql.c)
+ENDIF()
+
+IF(URIPARSER_FOUND)
+	INCLUDE_DIRECTORIES(${URIPARSER_INCLUDE_DIRS})
+	LIST(APPEND TOOLS_HEADERS include/tools/url.h)
+	LIST(APPEND TOOLS_SOURCES source/url.c)
+ENDIF()
 
 ADD_LIBRARY(libtools_objects OBJECT
 ${TOOLS_HEADERS}
