@@ -119,6 +119,17 @@
 	})
 #endif /* cast_ptr */
 
+/**
+ * @def __stringify
+ *
+ * This macro do indirect stringification of input arguments,
+ * mostly used with `__LINE__`.
+ */
+#ifndef __stringify
+#	define __stringify_1(...) #__VA_ARGS__
+#	define __stringify(...) __stringify_1(__VA_ARGS__)
+#endif /* __stringify */
+
 /** @} */
 
 #endif /* __TOOLS_TOOLS_H */

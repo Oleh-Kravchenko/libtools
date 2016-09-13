@@ -6,6 +6,7 @@ CLASS_GRAPH            = YES
 COLLABORATION_GRAPH    = YES
 CREATE_SUBDIRS         = NO
 DOT_FONTSIZE           = 12
+EXCLUDE_SYMBOLS        = __stringify_1
 EXTRACT_ALL            = YES
 GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
