@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "tools/dir_remove.h"
+#include "libtools/dir_remove.h"
 
 /*------------------------------------------------------------------------*/
 

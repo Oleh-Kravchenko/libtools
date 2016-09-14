@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "tools/mailbox.h"
-#include "tools/tools.h"
+#include "libtools/mailbox.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 

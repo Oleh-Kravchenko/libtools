@@ -2,7 +2,7 @@
 #include <ifaddrs.h>
 #include <string.h>
 
-#include "tools/iface.h"
+#include "libtools/iface.h"
 
 /*------------------------------------------------------------------------*/
 

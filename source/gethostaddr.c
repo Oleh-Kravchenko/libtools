@@ -4,7 +4,7 @@
 #include <netdb.h>
 #include <stddef.h>
 
-#include "tools/gethostaddr.h"
+#include "libtools/gethostaddr.h"
 
 /*------------------------------------------------------------------------*/
 

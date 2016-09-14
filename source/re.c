@@ -2,7 +2,7 @@
 #include <regex.h>
 #include <stdlib.h>
 
-#include "tools/re.h"
+#include "libtools/re.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -3,9 +3,9 @@
 #include <sys/un.h>
 #include <uriparser/Uri.h>
 
-#include "tools/gethostaddr.h"
-#include "tools/string.h"
-#include "tools/url.h"
+#include "libtools/gethostaddr.h"
+#include "libtools/string.h"
+#include "libtools/url.h"
 
 /*------------------------------------------------------------------------*/
 

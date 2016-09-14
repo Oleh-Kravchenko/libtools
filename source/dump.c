@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "tools/dump.h"
+#include "libtools/dump.h"
 
 /*------------------------------------------------------------------------*/
 

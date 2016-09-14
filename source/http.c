@@ -5,10 +5,10 @@
 #include <string.h>
 #include <sys/socket.h>
 
-#include "tools/http.h"
-#include "tools/recvline.h"
-#include "tools/tools.h"
-#include "tools/trim.h"
+#include "libtools/http.h"
+#include "libtools/recvline.h"
+#include "libtools/tools.h"
+#include "libtools/trim.h"
 
 /*------------------------------------------------------------------------*/
 

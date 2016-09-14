@@ -4,8 +4,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "tools/closeall.h"
-#include "tools/executefile.h"
+#include "libtools/closeall.h"
+#include "libtools/executefile.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -1,8 +1,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "tools/mkpasswd.h"
-#include "tools/tools.h"
+#include "libtools/mkpasswd.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <sys/socket.h>
 
-#include "tools/recvall.h"
+#include "libtools/recvall.h"
 
 /*------------------------------------------------------------------------*/
 

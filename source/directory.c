@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "tools/directory.h"
+#include "libtools/directory.h"
 
 /*------------------------------------------------------------------------*/
 

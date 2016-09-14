@@ -4,8 +4,8 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 
-#include "tools/sendfile.h"
-#include "tools/tools.h"
+#include "libtools/sendfile.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -5,9 +5,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "tools/closeall.h"
-#include "tools/daemonize.h"
-#include "tools/flock.h"
+#include "libtools/closeall.h"
+#include "libtools/daemonize.h"
+#include "libtools/flock.h"
 
 /*------------------------------------------------------------------------*/
 

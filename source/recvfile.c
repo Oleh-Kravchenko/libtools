@@ -4,8 +4,8 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 
-#include "tools/recvfile.h"
-#include "tools/tools.h"
+#include "libtools/recvfile.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <sys/socket.h>
 
-#include "tools/recvline.h"
+#include "libtools/recvline.h"
 
 /*------------------------------------------------------------------------*/
 

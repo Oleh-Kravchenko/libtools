@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <sys/file.h>
 
-#include "tools/flock.h"
+#include "libtools/flock.h"
 
 /*------------------------------------------------------------------------*/
 

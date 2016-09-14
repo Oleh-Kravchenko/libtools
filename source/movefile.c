@@ -6,8 +6,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "tools/movefile.h"
-#include "tools/tools.h"
+#include "libtools/movefile.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 

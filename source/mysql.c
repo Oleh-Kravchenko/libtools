@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "tools/mysql.h"
+#include "libtools/mysql.h"
 
 /*------------------------------------------------------------------------*/
 

@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "tools/trim.h"
+#include "libtools/trim.h"
 
 /*------------------------------------------------------------------------*/
 

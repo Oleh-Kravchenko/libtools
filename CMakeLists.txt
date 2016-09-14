@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
-PROJECT(libtools VERSION 0.0.2)
+PROJECT(libtools VERSION 0.0.3)
 
 INCLUDE(GNUInstallDirs)
 INCLUDE(CMakePackageConfigHelpers)
@@ -44,32 +44,32 @@ ${OPENSSL_INCLUDE_DIR}
 )
 
 SET(TOOLS_HEADERS
-include/tools/closeall.h
-include/tools/daemonize.h
-include/tools/directory.h
-include/tools/dir_remove.h
-include/tools/dump.h
-include/tools/env.h
-include/tools/executefile.h
-include/tools/file.h
-include/tools/flock.h
-include/tools/gethostaddr.h
-include/tools/hex.h
-include/tools/http.h
-include/tools/iface.h
-include/tools/list.h
-include/tools/mailbox.h
-include/tools/mkpasswd.h
-include/tools/movefile.h
-include/tools/recvall.h
-include/tools/recvfile.h
-include/tools/recvline.h
-include/tools/re.h
-include/tools/sendfile.h
-include/tools/sha1.h
-include/tools/string.h
-include/tools/tools.h
-include/tools/trim.h
+include/${PROJECT_NAME}/closeall.h
+include/${PROJECT_NAME}/daemonize.h
+include/${PROJECT_NAME}/directory.h
+include/${PROJECT_NAME}/dir_remove.h
+include/${PROJECT_NAME}/dump.h
+include/${PROJECT_NAME}/env.h
+include/${PROJECT_NAME}/executefile.h
+include/${PROJECT_NAME}/file.h
+include/${PROJECT_NAME}/flock.h
+include/${PROJECT_NAME}/gethostaddr.h
+include/${PROJECT_NAME}/hex.h
+include/${PROJECT_NAME}/http.h
+include/${PROJECT_NAME}/iface.h
+include/${PROJECT_NAME}/list.h
+include/${PROJECT_NAME}/mailbox.h
+include/${PROJECT_NAME}/mkpasswd.h
+include/${PROJECT_NAME}/movefile.h
+include/${PROJECT_NAME}/recvall.h
+include/${PROJECT_NAME}/recvfile.h
+include/${PROJECT_NAME}/recvline.h
+include/${PROJECT_NAME}/re.h
+include/${PROJECT_NAME}/sendfile.h
+include/${PROJECT_NAME}/sha1.h
+include/${PROJECT_NAME}/string.h
+include/${PROJECT_NAME}/tools.h
+include/${PROJECT_NAME}/trim.h
 )
 
 SET(TOOLS_SOURCES
@@ -101,13 +101,13 @@ source/trim.c
 
 IF(MYSQL_FOUND)
 	INCLUDE_DIRECTORIES(${MYSQL_INCLUDE_DIR})
-	LIST(APPEND TOOLS_HEADERS include/tools/mysql.h)
+	LIST(APPEND TOOLS_HEADERS include/${PROJECT_NAME}/mysql.h)
 	LIST(APPEND TOOLS_SOURCES source/mysql.c)
 ENDIF()
 
 IF(URIPARSER_FOUND)
 	INCLUDE_DIRECTORIES(${URIPARSER_INCLUDE_DIRS})
-	LIST(APPEND TOOLS_HEADERS include/tools/url.h)
+	LIST(APPEND TOOLS_HEADERS include/${PROJECT_NAME}/url.h)
 	LIST(APPEND TOOLS_SOURCES source/url.c)
 ENDIF()
 
@@ -187,12 +187,12 @@ COMPONENT
 	Devel
 )
 
-INSTALL(DIRECTORY "include/tools"
+INSTALL(FILES
+	${TOOLS_HEADERS}
 DESTINATION
-	"${INSTALL_INCLUDE_DIR}"
+	"${INSTALL_INCLUDE_DIR}/${PROJECT_NAME}"
 COMPONENT
 	Devel
-PATTERN *.h
 )
 
 INSTALL(FILES

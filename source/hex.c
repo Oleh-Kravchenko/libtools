@@ -3,7 +3,7 @@
 #include <openssl/bn.h>
 #include <string.h>
 
-#include "tools/hex.h"
+#include "libtools/hex.h"
 
 /*------------------------------------------------------------------------*/
 

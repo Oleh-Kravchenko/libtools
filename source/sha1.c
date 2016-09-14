@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "tools/sha1.h"
+#include "libtools/sha1.h"
 
 /*------------------------------------------------------------------------*/
 
