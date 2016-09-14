@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_HEX_H
-#define __TOOLS_HEX_H
+#ifndef __LIBTOOLS_HEX_H
+#define __LIBTOOLS_HEX_H
 
 #include <stddef.h>
 
@@ -50,4 +50,4 @@ size_t hex2bin(const char *hex, void *data, size_t data_len);
 
 /** @} */
 
-#endif /* __TOOLS_HEX_H */
+#endif /* __LIBTOOLS_HEX_H */

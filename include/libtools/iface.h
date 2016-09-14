@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_IFACE_H
-#define __TOOLS_IFACE_H
+#ifndef __LIBTOOLS_IFACE_H
+#define __LIBTOOLS_IFACE_H
 
 #include <net/if.h>
 #include <netinet/in.h>
@@ -55,4 +55,4 @@ int iface_list(void (*iface_cb)(struct iface*, void*), void *priv);
 
 /** @} */
 
-#endif /* __TOOLS_IFACE_H */
+#endif /* __LIBTOOLS_IFACE_H */

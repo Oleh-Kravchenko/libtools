@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_MKPASSWD_H
-#define __TOOLS_MKPASSWD_H
+#ifndef __LIBTOOLS_MKPASSWD_H
+#define __LIBTOOLS_MKPASSWD_H
 
 #include <stddef.h>
 
@@ -41,4 +41,4 @@ char *mkpasswd(char *s, size_t size);
 
 /** @} */
 
-#endif /* __TOOLS_MKPASSWD_H */
+#endif /* __LIBTOOLS_MKPASSWD_H */

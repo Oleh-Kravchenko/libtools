@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_STRING_H
-#define __TOOLS_STRING_H
+#ifndef __LIBTOOLS_STRING_H
+#define __LIBTOOLS_STRING_H
 
 /**
  * @addtogroup strings
@@ -79,4 +79,4 @@ size_t strlcat(char *dst, const char *src, size_t size);
 
 /** @} */
 
-#endif /* __TOOLS_STRING_H */
+#endif /* __LIBTOOLS_STRING_H */

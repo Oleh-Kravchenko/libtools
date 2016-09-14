@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_GETHOSTADDR_H
-#define __TOOLS_GETHOSTADDR_H
+#ifndef __LIBTOOLS_GETHOSTADDR_H
+#define __LIBTOOLS_GETHOSTADDR_H
 
 #include <netinet/in.h>
 
@@ -39,4 +39,4 @@ struct in_addr *gethostaddr(const char *hostname, struct in_addr *addr);
 
 /** @} */
 
-#endif /* __TOOLS_GETHOSTADDR_H */
+#endif /* __LIBTOOLS_GETHOSTADDR_H */

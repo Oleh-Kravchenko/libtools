@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_ENV_H
-#define __TOOLS_ENV_H
+#ifndef __LIBTOOLS_ENV_H
+#define __LIBTOOLS_ENV_H
 
 #include <stddef.h>
 
@@ -40,4 +40,4 @@ char *read_env(const char *env, char *s, size_t len);
 
 /** @} */
 
-#endif /* __TOOLS_ENV_H */
+#endif /* __LIBTOOLS_ENV_H */

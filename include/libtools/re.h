@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_RE_H
-#define __TOOLS_RE_H
+#ifndef __LIBTOOLS_RE_H
+#define __LIBTOOLS_RE_H
 
 /**
  * @addtogroup strings
@@ -36,4 +36,4 @@ int re_strcmp(const char *s, const char *mask);
 
 /** @} */
 
-#endif /* __TOOLS_RE_H */
+#endif /* __LIBTOOLS_RE_H */

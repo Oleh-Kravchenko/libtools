@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_FLOCK_H
-#define __TOOLS_FLOCK_H
+#ifndef __LIBTOOLS_FLOCK_H
+#define __LIBTOOLS_FLOCK_H
 
 #include <stdio.h>
 
@@ -67,4 +67,4 @@ int flclose(FILE *fp);
 
 /** @} */
 
-#endif /* __TOOLS_FLOCK_H */
+#endif /* __LIBTOOLS_FLOCK_H */

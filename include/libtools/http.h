@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_HTTP_H
-#define __TOOLS_HTTP_H
+#ifndef __LIBTOOLS_HTTP_H
+#define __LIBTOOLS_HTTP_H
 
 #include <stddef.h>
 
@@ -199,4 +199,4 @@ http_status_t http_reply_recv(int sockfd, http_reply_cb_t reply_cb, http_header_
 
 /** @} */
 
-#endif /* __TOOLS_HTTP_H */
+#endif /* __LIBTOOLS_HTTP_H */

@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_SHA1_H
-#define __TOOLS_SHA1_H
+#ifndef __LIBTOOLS_SHA1_H
+#define __LIBTOOLS_SHA1_H
 
 #include <openssl/sha.h>
 
@@ -45,4 +45,4 @@ int sha1_file(const char *path, sha1_t *hash);
 
 /** @} */
 
-#endif /* __TOOLS_SHA1_H */
+#endif /* __LIBTOOLS_SHA1_H */

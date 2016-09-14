@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_TOOLS_H
-#define __TOOLS_TOOLS_H
+#ifndef __LIBTOOLS_TOOLS_H
+#define __LIBTOOLS_TOOLS_H
 
 /**
  * @defgroup tools libtools
@@ -132,4 +132,4 @@
 
 /** @} */
 
-#endif /* __TOOLS_TOOLS_H */
+#endif /* __LIBTOOLS_TOOLS_H */

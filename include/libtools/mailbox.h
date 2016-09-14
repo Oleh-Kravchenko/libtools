@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_MAILBOX_H
-#define __TOOLS_MAILBOX_H
+#ifndef __LIBTOOLS_MAILBOX_H
+#define __LIBTOOLS_MAILBOX_H
 
 /**
  * @addtogroup tools
@@ -85,4 +85,4 @@ int mailbox_timedwait(mailbox_t mb, void **data, unsigned timeout);
 
 /** @} */
 
-#endif /* __TOOLS_MAILBOX_H */
+#endif /* __LIBTOOLS_MAILBOX_H */

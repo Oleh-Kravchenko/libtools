@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_DUMP_H
-#define __TOOLS_DUMP_H
+#ifndef __LIBTOOLS_DUMP_H
+#define __LIBTOOLS_DUMP_H
 
 /**
  * @addtogroup tools
@@ -50,4 +50,4 @@ void cdump8(const char *name, const void *buf, size_t len);
 
 /** @} */
 
-#endif /* __TOOLS_DUMP_H */
+#endif /* __LIBTOOLS_DUMP_H */

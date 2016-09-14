@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_SENDFILE_H
-#define __TOOLS_SENDFILE_H
+#ifndef __LIBTOOLS_SENDFILE_H
+#define __LIBTOOLS_SENDFILE_H
 
 /**
  * @addtogroup network
@@ -44,4 +44,4 @@ int sendfile(int sockfd, const char *path, size_t size);
 
 /** @} */
 
-#endif /* __TOOLS_SENDFILE_H */
+#endif /* __LIBTOOLS_SENDFILE_H */

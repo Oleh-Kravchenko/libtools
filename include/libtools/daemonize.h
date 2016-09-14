@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_DAEMONIZE_H
-#define __TOOLS_DAEMONIZE_H
+#ifndef __LIBTOOLS_DAEMONIZE_H
+#define __LIBTOOLS_DAEMONIZE_H
 
 #include <unistd.h>
 
@@ -67,4 +67,4 @@ pid_t pidlock_get(const char *path);
 
 /** @} */
 
-#endif /* __TOOLS_DAEMONIZE_H */
+#endif /* __LIBTOOLS_DAEMONIZE_H */

@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_MOVEFILE_H
-#define __TOOLS_MOVEFILE_H
+#ifndef __LIBTOOLS_MOVEFILE_H
+#define __LIBTOOLS_MOVEFILE_H
 
 /**
  * @addtogroup io
@@ -41,4 +41,4 @@ int movefile(const char *oldpath, const char *newpath);
 
 /** @} */
 
-#endif /* __TOOLS_MOVEFILE_H */
+#endif /* __LIBTOOLS_MOVEFILE_H */

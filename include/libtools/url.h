@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_URL_H
-#define __TOOLS_URL_H
+#ifndef __LIBTOOLS_URL_H
+#define __LIBTOOLS_URL_H
 
 #include <stdint.h>
 #include <sys/socket.h>
@@ -108,4 +108,4 @@ socklen_t sockaddr_size(const struct sockaddr_storage *sa);
 
 /** @} */
 
-#endif /* __TOOLS_URL_H */
+#endif /* __LIBTOOLS_URL_H */

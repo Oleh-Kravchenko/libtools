@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_DIRECTORY_H
-#define __TOOLS_DIRECTORY_H
+#ifndef __LIBTOOLS_DIRECTORY_H
+#define __LIBTOOLS_DIRECTORY_H
 
 #include <sys/types.h>
 
@@ -41,4 +41,4 @@ int mkdirectory(const char *path, mode_t mode);
 
 /** @} */
 
-#endif /* __TOOLS_DIRECTORY_H */
+#endif /* __LIBTOOLS_DIRECTORY_H */

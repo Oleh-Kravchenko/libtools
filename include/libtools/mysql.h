@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_MYSQL_H
-#define __TOOLS_MYSQL_H
+#ifndef __LIBTOOLS_MYSQL_H
+#define __LIBTOOLS_MYSQL_H
 
 #include <stdarg.h>
 #include <mysql/mysql.h>
@@ -90,4 +90,4 @@ int mysql_qprintf(MYSQL *mysql, const char *format, ...);
 
 /** @} */
 
-#endif /* __TOOLS_MYSQL_H */
+#endif /* __LIBTOOLS_MYSQL_H */

@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_CLOSEALL_H
-#define __TOOLS_CLOSEALL_H
+#ifndef __LIBTOOLS_CLOSEALL_H
+#define __LIBTOOLS_CLOSEALL_H
 
 /**
  * @addtogroup io
@@ -38,4 +38,4 @@ int closeall(int nostdclose);
 
 /** @} */
 
-#endif /* __TOOLS_CLOSEALL_H */
+#endif /* __LIBTOOLS_CLOSEALL_H */

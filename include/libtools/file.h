@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_FILE_H
-#define __TOOLS_FILE_H
+#ifndef __LIBTOOLS_FILE_H
+#define __LIBTOOLS_FILE_H
 
 #include <stddef.h>
 
@@ -50,4 +50,4 @@ void *get_file_contents(const char *path, void **buf, size_t *len);
 
 /** @} */
 
-#endif /* __TOOLS_FILE_H */
+#endif /* __LIBTOOLS_FILE_H */

@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_RECVALL_H
-#define __TOOLS_RECVALL_H
+#ifndef __LIBTOOLS_RECVALL_H
+#define __LIBTOOLS_RECVALL_H
 
 #include <stddef.h>
 
@@ -42,4 +42,4 @@ ssize_t recvall(int sockfd, void *buf, size_t len, int flags);
 
 /** @} */
 
-#endif /* __TOOLS_RECVALL_H */
+#endif /* __LIBTOOLS_RECVALL_H */

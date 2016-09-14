@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_TRIM_H
-#define __TOOLS_TRIM_H
+#ifndef __LIBTOOLS_TRIM_H
+#define __LIBTOOLS_TRIM_H
 
 /**
  * @addtogroup strings
@@ -46,4 +46,4 @@ void rtrim(char *s);
 
 /** @} */
 
-#endif /* __TOOLS_TRIM_H */
+#endif /* __LIBTOOLS_TRIM_H */

@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TOOLS_RECVLINE_H
-#define __TOOLS_RECVLINE_H
+#ifndef __LIBTOOLS_RECVLINE_H
+#define __LIBTOOLS_RECVLINE_H
 
 #include <stddef.h>
 
@@ -46,4 +46,4 @@ ssize_t recvline(int fd, char *buf, size_t size, const char *d, size_t dlen);
 
 /** @} */
 
-#endif /* __TOOLS_RECVLINE_H */
+#endif /* __LIBTOOLS_RECVLINE_H */
