@@ -132,6 +132,14 @@ INTERFACE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
+TARGET_LINK_LIBRARIES(libtools_static
+PRIVATE
+	${MYSQL_LIBRARY}
+	${OPENSSL_LIBRARIES}
+	${URIPARSER_LIBRARIES}
+	pthread
+)
+
 # define shared library
 ADD_LIBRARY(libtools SHARED $<TARGET_OBJECTS:libtools_objects>)
 
