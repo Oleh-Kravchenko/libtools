@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
-PROJECT(libtools VERSION 0.0.3)
+PROJECT(libtools VERSION 0.0.4)
 
 INCLUDE(GNUInstallDirs)
 INCLUDE(CMakePackageConfigHelpers)
@@ -61,6 +61,7 @@ include/${PROJECT_NAME}/list.h
 include/${PROJECT_NAME}/mailbox.h
 include/${PROJECT_NAME}/mkpasswd.h
 include/${PROJECT_NAME}/movefile.h
+include/${PROJECT_NAME}/popen2.h
 include/${PROJECT_NAME}/recvall.h
 include/${PROJECT_NAME}/recvfile.h
 include/${PROJECT_NAME}/recvline.h
@@ -89,6 +90,7 @@ source/iface.c
 source/mailbox.c
 source/mkpasswd.c
 source/movefile.c
+source/popen2.c
 source/re.c
 source/recvall.c
 source/recvfile.c
