@@ -191,6 +191,10 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 
 char *mysql_asprintf(MYSQL *mysql, char **str, const char *format, ...)
 {
+	assert(mysql);
+	assert(str);
+	assert(format);
+
 	va_list ap;
 	char *res;
 

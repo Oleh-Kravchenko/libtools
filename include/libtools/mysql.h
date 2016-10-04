@@ -24,22 +24,24 @@
 #include <mysql/mysql.h>
 
 /**
- * @addtogroup tools
+ * @defgroup mysql MySQL routines
+ * @ingroup tools
+ * @brief Routines to work with MySQL queries, it will make easy your life
  *
  * @{
  */
 
 /**
- * @copydoc mysql_asprintf()
  * @param [in] args list of arguments
+ * @copydoc mysql_asprintf()
  */
 char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args);
 
 /**
- * @brief allocate and format mysql query string
- * @param [in] mysql mysql connection handle
- * @param [out] str mysql query string
- * @param [in] format format of output string
+ * @brief Allocate and format MySQL query string
+ * @param [in] mysql connection handle
+ * @param [out] str query string
+ * @param [in] format SQL query format string
  * @return pointer to allocated string
  * @retval NULL error occurred
  *
@@ -76,9 +78,9 @@ char *mysql_asprintf(MYSQL *mysql, char **str, const char *format, ...);
 int mysql_transaction(MYSQL *mysql);
 
 /**
- * @brief Send a MySQL query
- * @param [in] mysql mysql connection handle
- * @param [in] format mysql query string
+ * @brief Format and execute a SQL query
+ * @param [in] mysql connection handle
+ * @param [in] format SQL query format string
  * @return on success, zero is returned
  * @retval -1 error occurred
  * @sa mysql_asprintf
