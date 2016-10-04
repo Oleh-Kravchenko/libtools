@@ -18,7 +18,7 @@
  */
 
 #ifdef __DOXYGEN
-#error this file only for doxygen
+#error This file only for doxygen
 
 /** I/O error */
 #define EIO 5
