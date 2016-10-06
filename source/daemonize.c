@@ -68,16 +68,16 @@ done:
 	if ((pid = fork())) {
 		if (-1 == pid) {
 			/* fail to fork, report about it */
-			exit(EXIT_FAILURE);
+			_exit(EXIT_FAILURE);
 		}
 
 		/* report about successful attempt running of daemon */
-		exit(EXIT_SUCCESS);
+		_exit(EXIT_SUCCESS);
 	}
 
 	/* now detach to init process */
 	if (-1 == setsid()) {
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	}
 
 	/* now we should report our pid... */
@@ -85,24 +85,24 @@ done:
 
 	/* to avoid duplicates of daemon */
 	if (sizeof(pid) != write(fds[1], &pid, sizeof(pid))) {
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	}
 
 	/* now we should close all fds */
 	if (closeall(noclose)) {
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	}
 
 	/* and change current directory to "/" */
 	if (!nochdir && chdir("/")) {
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	}
 
 	/* execute requested program */
 	execv(path, argv);
 
 	/* execl() don't return, if successful */
-	exit(EXIT_FAILURE);
+	_exit(EXIT_FAILURE);
 }
 
 /*------------------------------------------------------------------------*/

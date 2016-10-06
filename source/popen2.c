@@ -72,7 +72,7 @@ static void child(const char *path, int infd, int outfd, int errfd)
 	} while (0);
 
 	/* report about failure to parent process */
-	exit(EXIT_FAILURE);
+	_exit(EXIT_FAILURE);
 }
 
 /*------------------------------------------------------------------------*/

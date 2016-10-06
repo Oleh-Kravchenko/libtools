@@ -37,12 +37,12 @@ int executefile(const char *path)
 
 	/* close all file descriptors to avoid fd leaks */
 	if (closeall(1)) {
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	}
 
 	/* execute requested program */
 	execl(path, path, NULL);
 
 	/* execl() don't return, if successful */
-	exit(EXIT_FAILURE);
+	_exit(EXIT_FAILURE);
 }
