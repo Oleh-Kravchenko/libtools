@@ -73,7 +73,7 @@ static inline int url_parse_internal(UriUriA *uri, struct url *u)
 
 	/* extract path*/
 	if (uri->pathHead && uri->pathTail && uri->pathHead->text.first) {
-		if (!(u->path = strdup("/"))) {
+		if (uri->absolutePath && !(u->path = strdup("/"))) {
 			return (-1);
 		}
 
