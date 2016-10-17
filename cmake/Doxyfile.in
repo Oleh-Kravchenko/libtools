@@ -4,7 +4,6 @@ DOT_IMAGE_FORMAT       = svg
 EXCLUDE_SYMBOLS        = __stringify_1
 EXTRACT_ALL            = YES
 GENERATE_LATEX         = NO
-GENERATE_MAN           = YES
 GENERATE_TREEVIEW      = YES
 HAVE_DOT               = YES
 INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/README.md @TOOLS_HEADER_FILES@
