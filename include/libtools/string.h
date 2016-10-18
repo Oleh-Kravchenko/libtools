@@ -20,6 +20,8 @@
 #ifndef __LIBTOOLS_STRING_H
 #define __LIBTOOLS_STRING_H
 
+#include <stddef.h>
+
 /**
  * @addtogroup strings
  *

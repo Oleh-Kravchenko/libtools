@@ -26,6 +26,8 @@
  * @{
  */
 
+#include <stddef.h>
+
 /**
  * @brief Send file to the socket
  * @param [in] sockfd socket descriptor
