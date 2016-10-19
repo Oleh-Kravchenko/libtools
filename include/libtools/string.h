@@ -21,6 +21,7 @@
 #define __LIBTOOLS_STRING_H
 
 #include <stddef.h>
+#include <string.h>
 
 /**
  * @addtogroup strings
@@ -78,6 +79,18 @@ size_t strlcpy(char *dst, const char *src, size_t size);
  * @return total length of the string tried to create
  */
 size_t strlcat(char *dst, const char *src, size_t size);
+
+/**
+ * @brief Check, if string starts with substring
+ * @param [in] s pointer to string
+ * @param [in] ss pointer to substring
+ * @return result of comparison
+ * @retval 0 string is starting from substring
+ */
+static inline int str_startswith(const char *s, const char *ss)
+{
+	return (!strncmp(s, ss, strlen(ss)));
+}
 
 /** @} */
 
