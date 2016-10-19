@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "libtools/mysql.h"
+#include "libtools/string.h"
 
 /*------------------------------------------------------------------------*/
 
@@ -35,26 +36,26 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 		}
 
 		/* process format and calculate output strings */
-		if (!strncmp(fmt, "%int%", strlen("%int%"))) {
+		if (str_startswith(fmt, "%int%")) {
 			int i = va_arg(ap, int);
 
 			fmt += strlen("%int%");
 			outlen += (i ? (size_t)snprintf(NULL, 0, "%d", i) : strlen("NULL"));
-		} else if (!strncmp(fmt, "%INT%", strlen("%INT%"))) {
+		} else if (str_startswith(fmt, "%INT%")) {
 			fmt += strlen("%INT%");
 			outlen += snprintf(NULL, 0, "%d", va_arg(ap, int));
-		} else if (!strncmp(fmt, "%double%", strlen("%double%"))) {
+		} else if (str_startswith(fmt, "%double%")) {
 			double d = va_arg(ap, double);
 
 			fmt += strlen("%double%");
 			outlen += (0 != d ? (size_t)snprintf(NULL, 0, "%f", d) : strlen("NULL"));
-		} else if (!strncmp(fmt, "%DOUBLE%", strlen("%DOUBLE%"))) {
+		} else if (str_startswith(fmt, "%DOUBLE%")) {
 			fmt += strlen("%DOUBLE%");
 			outlen += snprintf(NULL, 0, "%f", va_arg(ap, double));
-		} else if (!strncmp(fmt, "%bool%", strlen("%bool%"))) {
+		} else if (str_startswith(fmt, "%bool%")) {
 			fmt += strlen("%bool%");
 			outlen += (va_arg(ap, int) ? strlen("TRUE") : strlen("FALSE"));
-		} else if(!strncmp(fmt, "%str%", strlen("%str%"))) {
+		} else if(str_startswith(fmt, "%str%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
@@ -71,24 +72,24 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			} else {
 				outlen += strlen("NULL");
 			}
-		} else if(!strncmp(fmt, "%STR%", strlen("%STR%"))) {
+		} else if(str_startswith(fmt, "%STR%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
 			fmt += strlen("%STR%");
 			outlen += len * 2 + 2;
-		} else if (!strncmp(fmt, "%RSTR%", strlen("%rstr"))) {
+		} else if (str_startswith(fmt, "%RSTR%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
 			fmt += strlen("%RSTR%");
 			outlen += len * 2;
-		} else if (!strncmp(fmt, "%time%", strlen("%time%"))) {
+		} else if (str_startswith(fmt, "%time%")) {
 			time_t t = va_arg(ap, time_t);
 
 			fmt += strlen("%time%");
 			outlen += (t ? (size_t)snprintf(NULL, 0, "FROM_UNIXTIME(%lu)", t) : strlen("NULL"));
-		} else if (!strncmp(fmt, "%%", strlen("%%"))) {
+		} else if (str_startswith(fmt, "%%")) {
 			fmt += strlen("%%");
 			++ outlen;
 		} else {
@@ -121,26 +122,26 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			continue;
 		}
 
-		if (!strncmp(fmt, "%int%", strlen("%int%"))) {
+		if (str_startswith(fmt, "%int%")) {
 			int i = va_arg(ap, int);
 
 			fmt += strlen("%int%");
 			out += (i ? sprintf(out, "%d", i) : sprintf(out, "NULL"));
-		} else if (!strncmp(fmt, "%INT%", strlen("%INT%"))) {
+		} else if (str_startswith(fmt, "%INT%")) {
 			fmt += strlen("%INT%");
 			out += sprintf(out, "%d", va_arg(ap, int));
-		} else if (!strncmp(fmt, "%double%", strlen("%double%"))) {
+		} else if (str_startswith(fmt, "%double%")) {
 			double d = va_arg(ap, double);
 
 			fmt += strlen("%double%");
 			out += (0 != d ? sprintf(out, "%f", d) : sprintf(out, "NULL"));
-		} else if (!strncmp(fmt, "%DOUBLE%", strlen("%DOUBLE%"))) {
+		} else if (str_startswith(fmt, "%DOUBLE%")) {
 			fmt += strlen("%DOUBLE%");
 			out += sprintf(out, "%f", va_arg(ap, double));
-		} else if (!strncmp(fmt, "%bool%", strlen("%bool%"))) {
+		} else if (str_startswith(fmt, "%bool%")) {
 			fmt += strlen("%bool%");
 			out += sprintf(out, "%s", va_arg(ap, int) ? "TRUE" : "FALSE");
-		} else if (!strncmp(fmt, "%str%", strlen("%str%"))) {
+		} else if (str_startswith(fmt, "%str%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
@@ -153,7 +154,7 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			} else {
 				out += sprintf(out, "NULL");
 			}
-		} else if (!strncmp(fmt, "%STR%", strlen("%STR%"))) {
+		} else if (str_startswith(fmt, "%STR%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
@@ -162,18 +163,18 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			*out ++ = '\'';
 			out += mysql_real_escape_string(mysql, out, s, len);
 			*out ++ = '\'';
-		} else if (!strncmp(fmt, "%RSTR%", strlen("%RSTR%"))) {
+		} else if (str_startswith(fmt, "%RSTR%")) {
 			const char *s = va_arg(ap, const char*);
 			size_t len = s ? strlen(s) : 0;
 
 			fmt += strlen("%RSTR%");
 			out += mysql_real_escape_string(mysql, out, s, len);
-		} else if (!strncmp(fmt, "%time%", strlen("%time%"))) {
+		} else if (str_startswith(fmt, "%time%")) {
 			time_t t = va_arg(ap, time_t);
 
 			fmt += strlen("%time%");
 			out += (t ? sprintf(out, "FROM_UNIXTIME(%lu)", t) : sprintf(out, "NULL"));
-		} else if (!strncmp(fmt, "%%", strlen("%%"))) {
+		} else if (str_startswith(fmt, "%%")) {
 			fmt += strlen("%%");
 			*out ++ = '%';
 		}
