@@ -336,7 +336,7 @@ static http_status_t http_readline(int sockfd, char *s, size_t *len)
 
 	/* verify end of line */
 	if (recvlen < (ssize_t)httpeol_len ||
-		memcmp(&s[recvlen - httpeol_len], httpeol, httpeol_len)
+		memcmp(&s[recvlen - httpeol_len], httpeol, httpeol_len) != 0
 	) {
 		return (HTTP_LARGE_REQUEST);
 	}

@@ -88,7 +88,7 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			time_t t = va_arg(ap, time_t);
 
 			fmt += strlen("%time%");
-			outlen += (t ? (size_t)snprintf(NULL, 0, "FROM_UNIXTIME(%lu)", t) : strlen("NULL"));
+			outlen += (t ? (size_t)snprintf(NULL, 0, "FROM_UNIXTIME(%tu)", t) : strlen("NULL"));
 		} else if (str_startswith(fmt, "%%")) {
 			fmt += strlen("%%");
 			++ outlen;
@@ -173,7 +173,7 @@ char *mysql_vasprintf(MYSQL *mysql, char **str, const char *format, va_list args
 			time_t t = va_arg(ap, time_t);
 
 			fmt += strlen("%time%");
-			out += (t ? sprintf(out, "FROM_UNIXTIME(%lu)", t) : sprintf(out, "NULL"));
+			out += (t ? sprintf(out, "FROM_UNIXTIME(%tu)", t) : sprintf(out, "NULL"));
 		} else if (str_startswith(fmt, "%%")) {
 			fmt += strlen("%%");
 			*out ++ = '%';
