@@ -20,6 +20,7 @@
 #ifndef __LIBTOOLS_STRING_H
 #define __LIBTOOLS_STRING_H
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -84,9 +85,10 @@ size_t strlcat(char *dst, const char *src, size_t size);
  * @brief Check, if string starts with substring
  * @param [in] s pointer to string
  * @param [in] ss pointer to substring
- * @return zero, if string @p s is starting from substring @p ss
+ * @retval true string @p s is starting from substring @p ss
+ * @retval false otherwise
  */
-static inline int str_startswith(const char *s, const char *ss)
+static inline bool str_startswith(const char *s, const char *ss)
 {
 	return (!strncmp(s, ss, strlen(ss)));
 }
