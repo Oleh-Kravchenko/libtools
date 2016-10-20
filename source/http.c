@@ -7,6 +7,7 @@
 
 #include "libtools/http.h"
 #include "libtools/recvline.h"
+#include "libtools/string.h"
 #include "libtools/tools.h"
 #include "libtools/trim.h"
 
@@ -14,11 +15,10 @@
 
 #define __HTTPEOL "\r\n"
 
-static const char httpeol[] = __HTTPEOL;
-static const size_t httpeol_len = countof(httpeol) - 1;
+static char httpeol[] = __HTTPEOL;
+static size_t httpeol_len = countof(httpeol) - 1;
 
 static const char httpver[] = "HTTP/";
-static const size_t httpver_len = countof(httpver) - 1;
 
 /*------------------------------------------------------------------------*/
 
@@ -193,7 +193,7 @@ static http_status_t http_request_parse(char *s, http_method_t *m, char **path, 
 	}
 
 	/* check HTTP version signature */
-	if (strncmp(*ver, httpver, httpver_len)) {
+	if (str_startswith(*ver, httpver)) {
 		return (HTTP_INVALID_REQUEST);
 	}
 
@@ -264,7 +264,7 @@ static http_status_t http_reply_parse(char *s, char **ver, int *code, char **msg
 	}
 
 	/* check HTTP version signature */
-	if (strncmp(*ver, httpver, httpver_len)) {
+	if (str_startswith(*ver, httpver)) {
 		return (HTTP_INVALID_REPLY);
 	}
 
@@ -364,7 +364,7 @@ http_status_t http_request_send(int sockfd, http_method_t method, const char *pa
 	}
 
 	/* check HTTP version signature */
-	if (strncmp(ver, httpver, httpver_len)) {
+	if (str_startswith(ver, httpver)) {
 		return (HTTP_INVALID_REQUEST);
 	}
 
@@ -455,7 +455,7 @@ http_status_t http_reply_send(int sockfd, const char *ver, int code, const char 
 	int len;
 
 	/* check HTTP version signature */
-	if (strncmp(ver, httpver, httpver_len)) {
+	if (str_startswith(ver, httpver)) {
 		return (HTTP_INVALID_REQUEST);
 	}
 
