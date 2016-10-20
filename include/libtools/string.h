@@ -84,8 +84,7 @@ size_t strlcat(char *dst, const char *src, size_t size);
  * @brief Check, if string starts with substring
  * @param [in] s pointer to string
  * @param [in] ss pointer to substring
- * @return result of comparison
- * @retval 0 string is starting from substring
+ * @return zero, if string @p s is starting from substring @p ss
  */
 static inline int str_startswith(const char *s, const char *ss)
 {

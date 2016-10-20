@@ -26,6 +26,7 @@
 /**
  * @addtogroup strings
  * @defgroup url URL parsing
+ * @ingroup tools
  * @brief Just wrapper around http://uriparser.sourceforge.net/
  *
  * For more details about syntax of URL please take a look:
