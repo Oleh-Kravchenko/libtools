@@ -29,7 +29,7 @@
  */
 
 /**
- * @brief save data to file
+ * @brief Save data to file
  * @param [in] path file name
  * @param [in] buf pointer to data buffer
  * @param [in] len length of data at buffer @p buf
@@ -39,7 +39,7 @@
 int put_file_contents(const char *path, const void *buf, size_t len);
 
 /**
- * @brief allocate memory and read data from file
+ * @brief Allocate memory and read data from file
  * @param [in] path file name
  * @param [out] buf pointer to file data
  * @param [out] len pointer to file length
