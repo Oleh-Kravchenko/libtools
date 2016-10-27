@@ -70,7 +70,7 @@ struct url {
  * @param [in] s URL string
  * @param [out] u pointer to URL parsed parts
  * @return pointer to URL structure
- * @retval NULL error occurred
+ * @retval NULL error occurred, @p u will be assigned to NULL
  *
  * Parsed URL will be extracted to struct url.
  *
@@ -82,7 +82,7 @@ struct url *url_parse(const char *s, struct url **u);
 
 /**
  * @brief Free memory used by URL structure
- * @param [in] u pointer to URL structure
+ * @param [in] u pointer to URL structure (can be NULL)
  */
 void url_free(struct url *u);
 
