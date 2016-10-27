@@ -65,3 +65,18 @@ void *get_file_contents(const char *path, void **buf, size_t *len)
 	/* return file data */
 	return (*buf);
 }
+
+/*------------------------------------------------------------------------*/
+
+int truncate_file(const char *path)
+{
+	assert(path);
+
+	FILE *f = fopen(path, "w");
+
+	if (f) {
+		return (fclose(f));
+	}
+
+	return (-1);
+}

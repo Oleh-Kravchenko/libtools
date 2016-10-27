@@ -48,6 +48,14 @@ int put_file_contents(const char *path, const void *buf, size_t len);
  */
 void *get_file_contents(const char *path, void **buf, size_t *len);
 
+/**
+ * @brief Truncate specified file
+ * @param [in] path file name
+ * @return on success, zero is returned
+ * @retval -1 error occurred
+ */
+int truncate_file(const char *path);
+
 /** @} */
 
 #endif /* __LIBTOOLS_FILE_H */
