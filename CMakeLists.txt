@@ -65,6 +65,7 @@ include/${PROJECT_NAME}/gethostaddr.h
 include/${PROJECT_NAME}/hex.h
 include/${PROJECT_NAME}/http.h
 include/${PROJECT_NAME}/iface.h
+include/${PROJECT_NAME}/input.h
 include/${PROJECT_NAME}/list.h
 include/${PROJECT_NAME}/mailbox.h
 include/${PROJECT_NAME}/mkpasswd.h
@@ -95,6 +96,7 @@ source/gethostaddr.c
 source/hex.c
 source/http.c
 source/iface.c
+source/input.c
 source/mailbox.c
 source/mkpasswd.c
 source/movefile.c

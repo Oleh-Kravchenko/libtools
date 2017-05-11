@@ -26,6 +26,9 @@
 /** Broken pipe */
 #define EPIPE 32
 
+/* No buffer space available */
+#define ENOBUFS 105
+
 /** Last error number */
 int errno;
 
