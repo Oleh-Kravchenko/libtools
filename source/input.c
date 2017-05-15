@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
@@ -13,6 +14,10 @@
 
 int prompts(const char *prompt, const char *def, char *s, size_t size)
 {
+	assert(prompt);
+	assert(def);
+	assert(s);
+
 	printf("%s [%s]: ", prompt, def);
 
 	if (!fgets(s, size, stdin)) {
