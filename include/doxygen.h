@@ -23,8 +23,14 @@
 /** I/O error */
 #define EIO 5
 
+/** Invalid argument */
+#define EINVAL 22
+
 /** Broken pipe */
 #define EPIPE 32
+
+/** Math result not representable */
+#define ERANGE 34
 
 /** No buffer space available */
 #define ENOBUFS 105

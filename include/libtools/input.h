@@ -43,6 +43,21 @@
  */
 int prompts(const char *prompt, const char *def, char *s, size_t size);
 
+/**
+ * @brief Read integer from stdin with prompt
+ * @param [in] prompt string that is displayed as a prompt to stdout
+ * @param [in] def default integer value
+ * @param [out] i pointer to integer
+ * @return zero returned
+ * @retval -1 error occurred
+ * @sa prompts, strtol
+ *
+ * Function updates #errno, if error occurred:
+ * @li #EINVAL non numeric input
+ * @li #ERANGE numerical result out of range
+ */
+int prompti(const char *prompt, int def, int *i);
+
 /** @} */
 
 #endif /* __LIBTOOLS_INPUT_H */

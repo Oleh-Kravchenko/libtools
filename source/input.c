@@ -1,14 +1,18 @@
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "libtools/input.h"
 #include "libtools/string.h"
+#include "libtools/tools.h"
 
 /*------------------------------------------------------------------------*/
 
-#define EOL ((int)'\n')
+#define EOL		((int)'\n')
+#define INTEGER_STRLEN	12
 
 /*------------------------------------------------------------------------*/
 
@@ -56,6 +60,66 @@ int prompts(const char *prompt, const char *def, char *s, size_t size)
 
 		return (-1);
 	}
+
+	return (0);
+}
+
+/*------------------------------------------------------------------------*/
+
+int prompti(const char *prompt, int def, int *i)
+{
+	assert(prompt);
+	assert(i);
+
+	char defstr[INTEGER_STRLEN];
+	ssize_t deflen;
+
+	/* convert default integer value to default string for prompt */
+	deflen = snprintf(defstr, sizeof(defstr), "%d", def);
+
+	unused(deflen);
+	assert(deflen < (ssize_t)sizeof(defstr));
+
+	char str[INTEGER_STRLEN];
+
+	/* read input */
+	if (prompts(prompt, defstr, str, sizeof(str))) {
+		return (-1);
+	}
+
+	/* if empty input use default integer value */
+	if (!*str) {
+		*i = def;
+
+		return (0);
+	}
+
+	errno = 0;
+
+	char *endptr = str;
+	long int val = strtol(str, &endptr, 10);
+
+	/* check strtol() errors */
+	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN)) ||
+		(errno && !val)) {
+		return (-1);
+	}
+
+	/* if the string is not parsed, return an error */
+	if (str == endptr || *endptr) {
+		errno = EINVAL;
+
+		return (-1);
+	}
+
+	/* check integer underflow or overflow */
+	if (val < INT_MIN || val > INT_MAX) {
+		errno = ERANGE;
+
+		return (-1);
+	}
+
+	*i = val;
 
 	return (0);
 }
