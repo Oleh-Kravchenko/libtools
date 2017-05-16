@@ -86,24 +86,17 @@ int prompti(const char *prompt, int def, int *i)
 	assert(prompt);
 	assert(i);
 
-	char defstr[INTEGER_STRLEN];
-	ssize_t deflen;
+	printf("%s [%d]: ", prompt, def);
 
-	/* convert default integer value to default string for prompt */
-	deflen = snprintf(defstr, sizeof(defstr), "%d", def);
-
-	unused(deflen);
-	assert(deflen < (ssize_t)sizeof(defstr));
-
-	char str[INTEGER_STRLEN];
+	char s[INTEGER_STRLEN];
 
 	/* read input */
-	if (prompts(prompt, defstr, str, sizeof(str))) {
+	if (!fgetz(s, sizeof(s), stdin)) {
 		return (-1);
 	}
 
 	/* if empty input use default integer value */
-	if (!*str) {
+	if (!*s) {
 		*i = def;
 
 		return (0);
@@ -111,8 +104,8 @@ int prompti(const char *prompt, int def, int *i)
 
 	errno = 0;
 
-	char *endptr = str;
-	long int val = strtol(str, &endptr, 10);
+	char *endptr = s;
+	long int val = strtol(s, &endptr, 10);
 
 	/* check strtol() errors */
 	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN)) ||
@@ -121,7 +114,7 @@ int prompti(const char *prompt, int def, int *i)
 	}
 
 	/* if the string is not parsed, return an error */
-	if (str == endptr || *endptr) {
+	if (s == endptr || *endptr) {
 		errno = EINVAL;
 
 		return (-1);

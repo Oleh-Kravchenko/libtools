@@ -67,7 +67,7 @@ int prompts(const char *prompt, const char *def, char *s, size_t size);
  * @param [out] i pointer to integer
  * @return zero returned
  * @retval -1 error occurred
- * @sa prompts, strtol
+ * @sa fgetz, strtol
  *
  * Function updates #errno, if error occurred:
  * @li #EINVAL non numeric input
