@@ -53,9 +53,9 @@ char *fgetz(char *s, int n, FILE *stream);
  * @param [in] size size of buffer @p s
  * @return zero returned
  * @retval -1 error occurred
+ * @sa fgetz
  *
  * Function updates #errno, if error occurred:
- * @li #EIO stdin is closed
  * @li #ENOBUFS buffer is small for inputted or default string
  */
 int prompts(const char *prompt, const char *def, char *s, size_t size);
