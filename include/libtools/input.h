@@ -29,6 +29,23 @@
  */
 
 /**
+ * @brief Like fgets() but with few exceptions
+ * @param [out] s pointer to string buffer
+ * @param [in] n length of string buffer
+ * @param [in] stream file input stream
+ * @return pointer to string buffer
+ * @retval NULL error occurred
+ *
+ * It behaves like fgets() but ignores the part of a string that doesn't fit
+ * in buffer and without '\n' on string end.
+ *
+ * Function updates #errno, if error occurred:
+ * @li #EIO stdin is closed or I/O error
+ * @li #ENOBUFS buffer is small for inputted or default string
+ */
+char *fgetz(char *s, int n, FILE *stream);
+
+/**
  * @brief Read string from stdin with prompt
  * @param [in] prompt string that is displayed as a prompt to stdout
  * @param [in] def default string value

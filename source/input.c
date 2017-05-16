@@ -16,6 +16,47 @@
 
 /*------------------------------------------------------------------------*/
 
+char *fgetz(char *s, int n, FILE *stream)
+{
+	assert(s);
+	assert(n > 0);
+	assert(stream);
+
+	if (!fgets(s, n, stream)) {
+		errno = EIO;
+
+		return (NULL);
+	}
+
+	char *end = s + strlen(s) - 1;
+
+	/* inputted string fit in buffer */
+	if (*end == EOL) {
+		/* remove EOL from string */
+		*end = '\0';
+
+		return (s);
+	}
+
+	int c = fgetc(stdin);
+
+	/* input is ended or stdin closed, return success */
+	if (c == EOF || c == EOL) {
+		return (s);
+	}
+
+	/* read until EOF/EOL and return error */
+	do {
+		c = fgetc(stdin);
+	} while (c != EOL && c != EOF);
+
+	errno = ENOBUFS;
+
+	return (NULL);
+}
+
+/*------------------------------------------------------------------------*/
+
 int prompts(const char *prompt, const char *def, char *s, size_t size)
 {
 	assert(prompt);
