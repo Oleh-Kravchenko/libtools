@@ -81,6 +81,34 @@ int prompts(const char *prompt, const char *def, char *s, size_t size)
 
 /*------------------------------------------------------------------------*/
 
+int s_prompts(const char *prompt, const char *def, char *s, size_t size)
+{
+	assert(prompt);
+	assert(def);
+	assert(s);
+
+	if (def != s) {
+		return (prompts(prompt, def, s, size));
+	}
+
+	int rc = -1;
+	char *buf;
+
+	if (!(buf = malloc(size))) {
+		return (rc);
+	}
+
+	if (!(rc = prompts(prompt, def, buf, size))) {
+		strcpy(s, buf);
+	}
+
+	free(buf);
+
+	return (rc);
+}
+
+/*------------------------------------------------------------------------*/
+
 int prompti(const char *prompt, int def, int *i)
 {
 	assert(prompt);

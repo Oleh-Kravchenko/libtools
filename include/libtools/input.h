@@ -61,6 +61,14 @@ char *fgetz(char *s, int n, FILE *stream);
 int prompts(const char *prompt, const char *def, char *s, size_t size);
 
 /**
+ * @copydoc prompts
+ *
+ * This function like #prompts, but allow to use the same pointer for @p def
+ * and @p s buffers.
+ */
+int s_prompts(const char *prompt, const char *def, char *s, size_t size);
+
+/**
  * @brief Read integer from stdin with prompt
  * @param [in] prompt string that is displayed as a prompt to stdout
  * @param [in] def default integer value
