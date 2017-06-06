@@ -20,6 +20,7 @@
 #ifndef __LIBTOOLS_INPUT_H
 #define __LIBTOOLS_INPUT_H
 
+#include <stdio.h>
 #include <stddef.h>
 
 /**
