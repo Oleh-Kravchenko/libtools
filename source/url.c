@@ -71,7 +71,7 @@ static inline int url_parse_internal(UriUriA *uri, struct url *u)
 		u->port = atoi(uri->portText.first);
 	}
 
-	/* extract path*/
+	/* extract path */
 	if (uri->pathHead && uri->pathTail && uri->pathHead->text.first) {
 		if (uri->absolutePath && !(u->path = strdup("/"))) {
 			return (-1);
@@ -124,9 +124,6 @@ struct url *url_parse(const char *s, struct url **u)
 	if (uriParseUriA(&(UriParserStateA){.uri = &uri}, s) == URI_SUCCESS) {
 		/* try to extract parsed URI */
 		error = url_parse_internal(&uri, *u);
-
-		/* allow to specify path in hostname with %2f delimiter */
-		uriUnescapeInPlaceA((*u)->hostname);
 	}
 
 	uriFreeUriMembersA(&uri);
@@ -174,14 +171,14 @@ int url2sockaddr(struct url *u, struct sockaddr_storage *sa)
 			return (-1);
 		}
 	/* socket address for UNIX */
-	} else if (u->scheme && u->hostname && (
+	} else if (u->scheme && u->path && (
 		!strcmp(u->scheme, "local") ||
 		!strcmp(u->scheme, "unix")
 	)) {
 		struct sockaddr_un *un = (struct sockaddr_un*)sa;
 
 		un->sun_family = AF_LOCAL;
-		strlcpy(un->sun_path, u->hostname, sizeof(un->sun_path));
+		strlcpy(un->sun_path, u->path, sizeof(un->sun_path));
 	} else {
 		return (-1);
 	}

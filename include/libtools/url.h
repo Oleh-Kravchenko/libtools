@@ -38,7 +38,7 @@
 
 /*------------------------------------------------------------------------*/
 
-/** parserd URL, see url_parse() */
+/** parsed URL, see url_parse() */
 struct url {
 	/** scheme (protocol) */
 	char *scheme;
@@ -94,8 +94,9 @@ void url_free(struct url *u);
  * @retval -1 error occurred
  *
  * Support next schemes:
- * @li @p http Internet sockets
- * @li @p unix sockets for local interprocess communication
+ * @li @p http Internet sockets, example: http://localhost/
+ * @li @p unix sockets for local interprocess communication,
+ * example: unix:/var/run/server.sock
  * @li @p local alias for @p unix sockets
  */
 int url2sockaddr(struct url *u, struct sockaddr_storage *sa);
