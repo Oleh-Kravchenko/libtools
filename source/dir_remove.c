@@ -37,7 +37,12 @@ int dir_remove(const char *path)
 
 	int ret = 0;
 
+	/* Please see details here: https://lwn.net/Articles/696474/ */
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	while (!readdir_r(dir, &ent, &saveptr) && saveptr) {
+	#pragma GCC diagnostic pop
+
 		if (!strcmp(ent.d_name, ".") || !strcmp(ent.d_name, "..")) {
 			continue;
 		}
