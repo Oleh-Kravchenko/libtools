@@ -32,14 +32,14 @@
 
 /**
  * @brief Concatenate dynamically allocated string with constant string
- * @param [in,out] dest pointer to pointer of dynamically allocated string
+ * @param [in,out] dst pointer to pointer of dynamically allocated string
  * @param [in] src pointer to constant string
  * @return pointer to concatenated string
  * @retval NULL error occurred
- * @remarks @p dest can point to NULL value
+ * @remarks @p dst can point to NULL value
  * @remarks @p src can be NULL
  */
-char *str_cat(char **dest, const char *src);
+char *str_cat(char **dst, const char *src);
 
 /**
  * @brief Similar to str_cat() except it will use at most @p n bytes from @p src

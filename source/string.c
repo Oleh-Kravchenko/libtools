@@ -6,15 +6,15 @@
 
 /*------------------------------------------------------------------------*/
 
-char *str_cat(char **dest, const char *src)
+char *str_cat(char **dst, const char *src)
 {
-	assert(dest);
+	assert(dst);
 
-	size_t dlen = *dest ? strlen(*dest) : 0;
+	size_t dlen = *dst ? strlen(*dst) : 0;
 	size_t slen = src ? strlen(src) : 0;
 	size_t tlen = dlen + slen;
 
-	char *s = realloc(*dest, tlen + 1);
+	char *s = realloc(*dst, tlen + 1);
 
 	if (s) {
 		/* suppress __nonnull warning */
@@ -23,7 +23,7 @@ char *str_cat(char **dest, const char *src)
 		}
 
 		s[tlen] = 0;
-		*dest = s;
+		*dst = s;
 	}
 
 	return (s);
