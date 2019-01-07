@@ -74,11 +74,11 @@
 /**
  * @def unused
  *
- * Variable can be not used in Release build,
+ * Some variables can be not used in Release build,
  * to suppress compiler warning this macro should be used.
  */
 #ifndef unused
-#	define unused(x) ((void)x)
+#	define unused(...) (void)(__VA_ARGS__)
 #endif /* unused */
 
 /**
