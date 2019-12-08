@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * Copyright (C) 2016  Oleh Kravchenko <oleg@kaa.org.ua>
+ * Copyright (C) 2019  Oleh Kravchenko <oleg@kaa.org.ua>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,17 +34,23 @@
  * @param [in] len length of binary data
  * @param [out] hex pointer to result buffer
  * @param [in] hex_len length of buffet at pointer @p hex
- * @return pointer to hex string
- * @retval NULL error occurred
+ * @return number of converted bytes
  */
-char *bin2hex(const void *data, size_t len, char *hex, size_t hex_len);
+size_t bin2hex(const void *data, size_t len, char *hex, size_t hex_len);
+
+/**
+ * @brief convert a hex digit to integer
+ * @param [in] ch ascii character
+ * @return integer
+ */
+int hex2int(char ch);
 
 /**
  * @brief convert hex string to binary data
  * @param [in] hex pointer to string with hex numbers
  * @param [out] data pointer to data buffer
  * @param [in] data_len length of data buffer at pointer @p data
- * @return length of converted data
+ * @return number of converted bytes
  */
 size_t hex2bin(const char *hex, void *data, size_t data_len);
 
