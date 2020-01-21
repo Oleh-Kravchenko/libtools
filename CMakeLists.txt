@@ -11,6 +11,7 @@ SET(INSTALL_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmak
 SET(INSTALL_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake")
 
 # configure MySQL support
+OPTION(WITH_MYSQL "Enable MySQL functions")
 IF(DEFINED WITH_MYSQL)
 	IF(WITH_MYSQL)
 		FIND_PACKAGE(MySQL REQUIRED)
@@ -20,6 +21,7 @@ ELSE()
 ENDIF()
 
 # configure uriparser support
+OPTION(WITH_URIPARSER "Enable Uriparser wrappers")
 IF(DEFINED WITH_URIPARSER)
 	IF(WITH_URIPARSER)
 		FIND_PACKAGE(PkgConfig REQUIRED)
@@ -33,6 +35,7 @@ ELSE()
 ENDIF()
 
 # configure documentation support
+OPTION(WITH_DOC "Enable documentation")
 IF(DEFINED WITH_DOC)
 	IF(WITH_DOC)
 		FIND_PACKAGE(Doxygen REQUIRED)
