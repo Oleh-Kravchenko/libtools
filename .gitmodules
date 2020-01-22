@@ -1,0 +1,6 @@
+[submodule "3rdparty/cmake-version4git"]
+	path = 3rdparty/cmake-version4git
+	url = https://github.com/Oleh-Kravchenko/cmake-version4git.git
+[submodule "3rdparty/cmake-doxygen"]
+	path = 3rdparty/cmake-doxygen
+	url = https://github.com/Oleh-Kravchenko/cmake-doxygen.git
