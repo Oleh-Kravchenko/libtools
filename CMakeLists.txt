@@ -87,7 +87,6 @@ include/${PROJECT_NAME}/recvfile.h
 include/${PROJECT_NAME}/recvline.h
 include/${PROJECT_NAME}/re.h
 include/${PROJECT_NAME}/sendfile.h
-include/${PROJECT_NAME}/sha1.h
 include/${PROJECT_NAME}/strexp.h
 include/${PROJECT_NAME}/string.h
 include/${PROJECT_NAME}/tools.h
@@ -118,7 +117,6 @@ source/recvall.c
 source/recvfile.c
 source/recvline.c
 source/sendfile.c
-source/sha1.c
 source/strexp.c
 source/string.c
 source/trim.c
