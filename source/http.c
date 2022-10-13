@@ -82,11 +82,11 @@ static http_status_t http_headers_send(int sockfd, http_header_t hdr[], size_t c
 
 		http_status_t ret;
 
-		if (HTTP_ERROR(ret = sock2http_status(send(sockfd, s, len, 0)))) {
-			return (ret);
-		}
-
+		ret = sock2http_status(send(sockfd, s, len, 0));
 		free(s);
+
+		if (HTTP_ERROR(ret))
+			return (ret);
 	}
 
 	/* send empty line to finish */
@@ -378,11 +378,11 @@ http_status_t http_request_send(int sockfd, http_method_t method, const char *pa
 	}
 
 	/* send HTTP request */
-	if (HTTP_ERROR(ret = sock2http_status(send(sockfd, s, len, 0)))) {
-		return (ret);
-	}
-
+	ret = sock2http_status(send(sockfd, s, len, 0));
 	free(s);
+
+	if (HTTP_ERROR(ret))
+		return (ret);
 
 	/* send headers */
 	return (http_headers_send(sockfd, hdr, count));
@@ -466,11 +466,11 @@ http_status_t http_reply_send(int sockfd, const char *ver, int code, const char 
 	}
 
 	/* send HTTP reply */
-	if (HTTP_ERROR(ret = sock2http_status(send(sockfd, s, len, 0)))) {
-		return (ret);
-	}
-
+	ret = sock2http_status(send(sockfd, s, len, 0));
 	free(s);
+
+	if (HTTP_ERROR(ret))
+		return (ret);
 
 	/* send headers */
 	return (http_headers_send(sockfd, hdr, count));
