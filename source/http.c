@@ -96,10 +96,10 @@ static http_status_t http_headers_send(int sockfd, http_header_t hdr[], size_t c
 /*------------------------------------------------------------------------*/
 
 /**
- * @brief return text representation of HTTP method
- * @param [in] method method
+ * @brief return string representation of the HTTP method
+ * @param [in] method HTTP method
  * @param [out] m string
- * @return pointer to @p
+ * @return string representation of the HTTP method
  * @retval NULL unknown HTTP method
  */
 static const char *http_method_str(http_method_t method, const char **m)

@@ -77,15 +77,6 @@ static void child(const char *path, int infd, int outfd, int errfd)
 
 /*------------------------------------------------------------------------*/
 
-/**
- * @brief Run process and open standard streams
- * @param [in] path executable filename
- * @param [out] in pointer to stdin stream for child process
- * @param [out] out pointer to stdout stream for child process
- * @param [out] err pointer to stderr stream for child process
- * @return pid_t
- * @retval -1 error occurred
- */
 pid_t popen2(const char *path, FILE **in, FILE **out, FILE **err)
 {
 	assert(path);

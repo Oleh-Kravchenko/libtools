@@ -113,7 +113,7 @@ typedef struct http_header {
 
 /**
  * @brief pointer to a callback function to process request
- * @param [in] method HTTP method
+ * @param [in] m HTTP method
  * @param [in] path resource path
  * @param [in] ver version of HTTP protocol
  * @param [in] priv private data for callback
