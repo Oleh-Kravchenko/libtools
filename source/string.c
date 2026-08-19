@@ -69,7 +69,8 @@ char *str_replace(const char *search, const char *replace, const char *subject)
 	const size_t replacelen = strlen(replace);
 
 	/* search needle and replace it */
-	char *p, *needle;
+	char *p;
+	const char *needle;
 
 	while ((needle = strstr(subject, search))) {
 		const size_t headlen = needle - subject;
