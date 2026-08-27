@@ -4,12 +4,12 @@ PROJECT(libtools)
 
 FIND_PACKAGE(cmake-doxygen QUIET)
 IF(NOT cmake-doxygen_FOUND)
-	INCLUDE(3rdparty/cmake-version4git/cmake/cmake-version4git.cmake)
+	INCLUDE(3rdparty/cmake-doxygen/cmake/cmake-doxygen.cmake)
 ENDIF()
 
 FIND_PACKAGE(cmake-version4git QUIET)
 IF(NOT cmake-version4git_FOUND)
-	INCLUDE(3rdparty/cmake-doxygen/cmake/cmake-doxygen.cmake)
+	INCLUDE(3rdparty/cmake-version4git/cmake/cmake-version4git.cmake)
 ENDIF()
 PROJECT_VERSION_FROM_GIT(${CMAKE_CURRENT_SOURCE_DIR})
 
