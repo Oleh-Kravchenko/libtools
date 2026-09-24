@@ -17,7 +17,7 @@ int dir_remove(const char *path)
 
 	struct stat st;
 
-	if (stat(path, &st)) {
+	if (lstat(path, &st)) {
 		return (-1);
 	}
 
