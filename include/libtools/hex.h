@@ -42,6 +42,7 @@ size_t bin2hex(const void *data, size_t len, char *hex, size_t hex_len);
  * @brief convert a hex digit to integer
  * @param [in] ch ascii character
  * @return integer
+ * @retval -1 on error
  */
 int hex2int(char ch);
 

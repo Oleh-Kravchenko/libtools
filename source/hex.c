@@ -40,9 +40,9 @@ int hex2int(char ch)
 	if ('0' <= ch && ch <= '9') {
 		d = ch - '0';
 	} else if ('a' <= ch && ch <= 'f') {
-		d = ch - 'a';
+		d = ch - 'a' + 0xa;
 	} else if ('A' <= ch && ch <= 'F') {
-		d = ch - 'A';
+		d = ch - 'A' + 0xa;
 	}
 
 	return (d);
