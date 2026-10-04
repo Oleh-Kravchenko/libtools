@@ -108,6 +108,20 @@
 #endif /* max */
 
 /**
+ * @def constrain
+ *
+ * return a if x < a, b if x > b, otherwise x
+ */
+#ifndef constrain
+#	define constrain(x, a, b) ({                                      \
+		typeof (a) _x = (x);                                      \
+		typeof (b) _a = (a);                                      \
+		typeof (b) _b = (b);                                      \
+		min(max(x, a), b);                                        \
+})
+#endif /* constrain */
+
+/**
  * @def cast_ptr
  * @brief cast pointer
  * @param [in] t target type
