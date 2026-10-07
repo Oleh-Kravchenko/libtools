@@ -118,8 +118,21 @@
 		typeof (b) _a = (a);                                      \
 		typeof (b) _b = (b);                                      \
 		min(max(x, a), b);                                        \
-})
+	})
 #endif /* constrain */
+
+/**
+ * @def pow2
+ * @remark very useful for floats and doubles
+ *
+ * return square
+ */
+#ifndef pow2
+#	define pow2(x) __extension__ ({                                   \
+		typeof (x) _x = (x);                                      \
+		_x * _x;                                                  \
+	})
+#endif /* pow2 */
 
 /**
  * @def cast_ptr
